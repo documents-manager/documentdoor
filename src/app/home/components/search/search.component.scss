@@ -1,0 +1,22 @@
+@use 'sass:map';
+@use '~@angular/material' as mat;
+@use 'src/styles' as theme;
+$primary-color: mat.get-color-from-palette(theme.$documentdoor-primary, 400);
+
+.searchContainer {
+  font-size: 16px;
+  padding: 8px;
+
+  .mat-form-field {
+    border-radius: 5px;
+    width: 100%;
+    background-color: $primary-color;
+    .mat-form-field-wrapper {
+      margin-bottom: -1.25em;
+    }
+
+    .mat-form-field-underline {
+      display: none;
+    }
+  }
+}

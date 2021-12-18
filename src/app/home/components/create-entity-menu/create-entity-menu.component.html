@@ -1,0 +1,15 @@
+<button class="extended-fab-button" mat-fab color="primary" [mat-menu-trigger-for]="createEntityMenu">
+  <mat-icon>add</mat-icon>
+  <span class="extended-fab-button__text">Neu</span>
+</button>
+
+<mat-menu #createEntityMenu="matMenu">
+  <button (click)="onAddEpicClicked()" mat-menu-item>
+    <mat-icon>bookmark</mat-icon>
+    <span>Neues Epic</span>
+  </button>
+  <button (click)="onAddLabelClicked()" mat-menu-item>
+    <mat-icon>new_label</mat-icon>
+    <span>Neues Label</span>
+  </button>
+</mat-menu>

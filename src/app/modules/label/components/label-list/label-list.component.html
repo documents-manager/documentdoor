@@ -1,0 +1,9 @@
+<mat-list>
+  <mat-list-item *ngFor="let label of labels">
+    <app-label-list-item
+      [label]="label"
+      (editClicked)="onEditClicked(label)"
+      (deleteClicked)="onDeleteClicked(label)"
+    ></app-label-list-item>
+  </mat-list-item>
+</mat-list>

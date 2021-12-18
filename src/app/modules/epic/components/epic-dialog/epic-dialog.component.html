@@ -1,0 +1,13 @@
+<h1 mat-dialog-title *ngIf="data.case === 'add'">Epic hinzufügen</h1>
+<h1 mat-dialog-title *ngIf="data.case === 'edit'">Epic bearbeiten</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Name</mat-label>
+    <input #name="ngModel" matInput [(ngModel)]="epic.name" [required]="true" cdkFocusInitial />
+    <mat-error *ngIf="name.invalid && name.errors?.required">Name ist verpflichtend</mat-error>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Abbrechen</button>
+  <button mat-button (click)="onSaveClick(epic)">Speichern</button>
+</div>

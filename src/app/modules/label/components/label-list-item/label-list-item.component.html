@@ -1,0 +1,11 @@
+<div fxLayout="row" fxLayoutAlign=" center">
+  <span fxFlex>{{ label.name }}</span>
+  <div fxFlex="nogrow">
+    <button mat-icon-button (click)="onEditClicked()">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button (click)="onDeleteClicked()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</div>

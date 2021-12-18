@@ -1,0 +1,52 @@
+<ng-container *ngIf="{ matches: isHandset$ | ngrxPush } as handset">
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav
+      #drawer
+      class="sidenav"
+      fixedInViewport
+      [attr.role]="handset.matches ? 'dialog' : 'navigation'"
+      [mode]="handset.matches ? 'over' : 'side'"
+      [opened]="!handset.matches"
+    >
+      <mat-toolbar color="primary" class="toolbar">
+        <a href="/"><img class="logo" src="assets/logos/white.svg" alt="logo" /></a>
+      </mat-toolbar>
+      <div class="new-button-container">
+        <app-create-entity-menu></app-create-entity-menu>
+      </div>
+      <mat-nav-list>
+        <a mat-list-item [routerLink]="['/', 'dashboard']" [routerLinkActive]="['active']">Dashboard</a>
+        <a mat-list-item [routerLink]="['/', 'epic']" [routerLinkActive]="['active']">Epics</a>
+        <a mat-list-item [routerLink]="['/', 'label']" [routerLinkActive]="['active']">Labels</a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar class="primary-toolbar toolbar" color="primary" fxLayout="row" fxLayoutAlign=" center">
+        <div fxFlex="nogrow">
+          <button
+            *ngIf="handset.matches"
+            type="button"
+            aria-label="Toggle sidenav"
+            mat-icon-button
+            (click)="drawer.toggle()"
+          >
+            <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+          </button>
+        </div>
+
+        <div fxLayout="row" fxFlex="fill" fxLayoutAlign="space-around center">
+          <app-search
+            fxFlex="50"
+            fxFlex.lt-md="100"
+            [term]="term$ | ngrxPush"
+            (searchTermChanged)="onSearchTermChanged($event)"
+          ></app-search>
+        </div>
+      </mat-toolbar>
+      <div class="container">
+        <!-- Add Content Here -->
+        <ng-content></ng-content>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</ng-container>

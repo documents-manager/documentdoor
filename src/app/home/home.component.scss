@@ -1,0 +1,48 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.mat-drawer {
+  border-right: none;
+}
+
+.container {
+  margin: 20px;
+}
+
+.logo {
+  width: 100%;
+  height: auto;
+}
+
+.toolbar {
+  min-height: 80px !important;
+  height: 80px !important;
+}
+
+.primary-toolbar > {
+  padding: 12px;
+}
+
+.new-button-container {
+  padding: 16px;
+}
+
+.mat-nav-list a.active,
+.mat-nav-list a:hover {
+  border-radius: 0 2em 2em 0;
+}

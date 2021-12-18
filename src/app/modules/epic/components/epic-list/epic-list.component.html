@@ -1,0 +1,9 @@
+<mat-list>
+  <mat-list-item *ngFor="let epic of epics">
+    <app-epic-list-item
+      [epic]="epic"
+      (editClicked)="onEditClicked(epic)"
+      (deleteClicked)="onDeleteClicked(epic)"
+    ></app-epic-list-item>
+  </mat-list-item>
+</mat-list>
