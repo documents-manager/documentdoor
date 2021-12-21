@@ -30,7 +30,7 @@ export class EpicComponent {
       }
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(result => {
       if (result?.ok && result.epic) {
         this.epicService.add(result?.epic);
         this.epicService.getAll();
@@ -46,7 +46,7 @@ export class EpicComponent {
       }
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(result => {
       if (result?.ok && result.epic) {
         this.epicService.update(result?.epic);
       }

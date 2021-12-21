@@ -17,15 +17,7 @@ describe('DashboardComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [DashboardComponent],
-        imports: [
-          NoopAnimationsModule,
-          LayoutModule,
-          MatButtonModule,
-          MatCardModule,
-          MatGridListModule,
-          MatIconModule,
-          MatMenuModule,
-        ],
+        imports: [NoopAnimationsModule, LayoutModule, MatButtonModule, MatCardModule, MatGridListModule, MatIconModule, MatMenuModule]
       }).compileComponents();
     })
   );

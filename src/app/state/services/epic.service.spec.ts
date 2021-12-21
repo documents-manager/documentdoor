@@ -7,7 +7,7 @@ describe('EpicService', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      providers: [EntityCollectionServiceElementsFactory, EpicService],
+      providers: [EntityCollectionServiceElementsFactory, EpicService]
     });
 
     await TestBed.compileComponents();

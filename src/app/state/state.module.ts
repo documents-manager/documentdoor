@@ -10,6 +10,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { SearchEffects } from './search/search.effects';
 import { ReactiveComponentModule } from '@ngrx/component';
+import { LabelEffects } from './effects/label.effects';
+import { MatDialogModule } from '@angular/material/dialog';
+
+const materialModules = [MatDialogModule];
 
 @NgModule({
   declarations: [],
@@ -17,14 +21,15 @@ import { ReactiveComponentModule } from '@ngrx/component';
     CommonModule,
     HttpClientModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([SearchEffects]),
+    EffectsModule.forRoot([SearchEffects, LabelEffects]),
     EntityDataModule.forRoot(entityConfig),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
       autoPause: true
     }),
-    ReactiveComponentModule
+    ReactiveComponentModule,
+    ...materialModules
   ],
   providers: [{ provide: DefaultDataServiceConfig, useValue: environment.serverConfig }]
 })

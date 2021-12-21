@@ -6,6 +6,6 @@ export const selectSearch = createFeatureSelector<SearchState>('search');
 
 // export const selectSearch = (state: State) => state.search;
 
-export const searchTerm = createSelector(selectSearch, (searchState) => searchState.term);
-export const searchLoading = createSelector(selectSearch, (searchState) => searchState.loading);
-export const searchError = createSelector(selectSearch, (searchState) => searchState.error);
+export const searchTerm = createSelector(selectSearch, searchState => searchState.term);
+export const searchLoading = createSelector(selectSearch, searchState => searchState.loading);
+export const searchError = createSelector(selectSearch, searchState => searchState.error);

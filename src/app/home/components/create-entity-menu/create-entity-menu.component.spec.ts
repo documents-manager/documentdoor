@@ -8,9 +8,8 @@ describe('CreateEntityMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CreateEntityMenuComponent ]
-    })
-    .compileComponents();
+      declarations: [CreateEntityMenuComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {
