@@ -11,7 +11,7 @@ export class WithLoadingPipe implements PipeTransform {
     return val.pipe(
       map((value: any) => ({ loading: false, value })),
       startWith({ loading: true }),
-      catchError((error) => of({ loading: false, error }))
+      catchError(error => of({ loading: false, error }))
     );
   }
 }

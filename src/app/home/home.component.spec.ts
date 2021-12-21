@@ -17,15 +17,7 @@ describe('HomeComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [HomeComponent],
-        imports: [
-          NoopAnimationsModule,
-          LayoutModule,
-          MatButtonModule,
-          MatIconModule,
-          MatListModule,
-          MatSidenavModule,
-          MatToolbarModule,
-        ],
+        imports: [NoopAnimationsModule, LayoutModule, MatButtonModule, MatIconModule, MatListModule, MatSidenavModule, MatToolbarModule]
       }).compileComponents();
     })
   );

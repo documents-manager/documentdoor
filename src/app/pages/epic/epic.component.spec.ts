@@ -8,7 +8,7 @@ describe('EpicComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EpicComponent],
+      declarations: [EpicComponent]
     }).compileComponents();
   });
 

@@ -20,21 +20,6 @@ export class LabelComponent {
     this.labelService.getAll();
   }
 
-  onAddLabel() {
-    const dialogRef = this.dialog.open<LabelDialogComponent, LabelDialogData, LabelDialogResult>(LabelDialogComponent, {
-      data: {
-        case: 'add'
-      }
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result?.ok && result.label) {
-        this.labelService.add(result?.label);
-        this.labelService.getAll();
-      }
-    });
-  }
-
   onEditLabel(label: Label) {
     const dialogRef = this.dialog.open<LabelDialogComponent, LabelDialogData, LabelDialogResult>(LabelDialogComponent, {
       data: {
@@ -43,7 +28,7 @@ export class LabelComponent {
       }
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(result => {
       if (result?.ok && result.label) {
         this.labelService.update(result?.label);
       }

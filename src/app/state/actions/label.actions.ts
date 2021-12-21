@@ -1,3 +1,3 @@
-import { createAction, props } from '@ngrx/store';
+import { createAction } from '@ngrx/store';
 
-export const openAddDialog = createAction('[Label] Open Add Dialog');
+export const openLabelAddDialog = createAction('[Label] Open Label Add Dialog');
