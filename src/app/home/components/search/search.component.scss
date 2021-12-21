@@ -1,7 +1,7 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
-@use 'src/styles' as theme;
-$primary-color: mat.get-color-from-palette(theme.$documentdoor-primary, 400);
+@use 'src/theming/palette.scss' as theme;
+$primary-color: mat.get-color-from-palette(theme.$primary, 400);
 
 .searchContainer {
   font-size: 16px;
