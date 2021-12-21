@@ -12,6 +12,7 @@ import { SearchEffects } from './search/search.effects';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { LabelEffects } from './effects/label.effects';
 import { MatDialogModule } from '@angular/material/dialog';
+import {EpicEffects} from "./effects/epic.effects";
 
 const materialModules = [MatDialogModule];
 
@@ -21,7 +22,7 @@ const materialModules = [MatDialogModule];
     CommonModule,
     HttpClientModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([SearchEffects, LabelEffects]),
+    EffectsModule.forRoot([SearchEffects, LabelEffects, EpicEffects]),
     EntityDataModule.forRoot(entityConfig),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

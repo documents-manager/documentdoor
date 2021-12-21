@@ -1,8 +1,5 @@
 <div class="header" fxLayout="row" fxLayoutAlign="space-between center">
   <h1>Epics</h1>
-  <button mat-fab color="primary" (click)="onAddEpic()">
-    <mat-icon>add</mat-icon>
-  </button>
 </div>
 
 <ng-container *ngIf="epics$ | withLoading | ngrxPush as state">
