@@ -12,7 +12,7 @@
         <a href="/"><img class="logo" src="assets/logos/white.svg" alt="logo" /></a>
       </mat-toolbar>
       <div class="new-button-container">
-        <app-create-entity-menu (addLabelClicked)="addLabelClicked()"></app-create-entity-menu>
+        <app-create-entity-menu (addLabelClicked)="addLabelClicked()" (addEpicClicked)="addEpicClicked()"></app-create-entity-menu>
       </div>
       <mat-nav-list>
         <a mat-list-item [routerLink]="['/', 'dashboard']" [routerLinkActive]="['active']">Dashboard</a>
@@ -23,13 +23,8 @@
     <mat-sidenav-content>
       <mat-toolbar class="primary-toolbar toolbar" color="primary" fxLayout="row" fxLayoutAlign=" center">
         <div fxFlex="nogrow">
-          <button
-            *ngIf="handset.matches"
-            type="button"
-            aria-label="Toggle sidenav"
-            mat-icon-button
-            (click)="drawer.toggle()"
-          >
+          <button (click)="drawer.toggle()" *ngIf="handset.matches" aria-label="Toggle sidenav" mat-icon-button
+                  type="button">
             <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
           </button>
         </div>

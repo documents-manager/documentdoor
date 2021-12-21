@@ -5,11 +5,8 @@
 <ng-container *ngIf="labels$ | withLoading | ngrxPush as state">
   <ng-container *ngIf="state.value">
     <div>
-      <app-label-list
-        [labels]="state.value"
-        (editClicked)="onEditLabel($event)"
-        (deleteClicked)="onDeleteLabel($event)"
-      ></app-label-list>
+      <app-label-list (deleteClicked)="onDeleteLabel($event)" (editClicked)="onEditLabel($event)"
+                      [labels]="state.value"></app-label-list>
     </div>
   </ng-container>
   <ng-container *ngIf="state.error"> Error {{ state.error }} </ng-container>
