@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { Epic } from '@state';
 import { MatDialog } from '@angular/material/dialog';
 import { EpicDialogComponent } from '../../shared/creation-dialogs/components/epic-dialog/epic-dialog.component';
-import { EpicDialogData } from './models';
-import { EpicDialogResult } from './models/epic-dialog';
+import { EpicDialogData } from '../../shared/creation-dialogs/models';
+import { EpicDialogResult } from '../../shared/creation-dialogs/models/epic-dialog';
 
 @Component({
   selector: 'app-epic',

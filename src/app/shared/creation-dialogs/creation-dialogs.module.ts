@@ -6,8 +6,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
+import { DocumentDialogComponent } from './components/document-dialog/document-dialog.component';
 
-const components = [EpicDialogComponent, LabelDialogComponent];
+const components = [EpicDialogComponent, LabelDialogComponent, DocumentDialogComponent];
 
 @NgModule({
   declarations: components,

@@ -5,7 +5,7 @@ import { LabelService } from '../../state/services/label.service';
 import { MatDialog } from '@angular/material/dialog';
 import { LabelDialogComponent } from '../../shared/creation-dialogs/components/label-dialog/label-dialog.component';
 import { LabelDialogData } from './models';
-import { LabelDialogResult } from './models/label-dialog';
+import { LabelDialogResult } from '../../shared/creation-dialogs/models/label-dialog';
 
 @Component({
   selector: 'app-label',

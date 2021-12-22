@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { EpicDialogData } from '../../../../pages/epic/models';
+import { EpicDialogData } from '../../models';
 import { Epic } from '@state';
-import { EpicDialogResult } from '../../../../pages/epic/models/epic-dialog';
+import { EpicDialogResult } from '../../models/epic-dialog';
 
 @Component({
   selector: 'app-epic-dialog',

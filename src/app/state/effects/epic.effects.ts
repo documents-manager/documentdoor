@@ -4,8 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { EpicService } from '../services/epic.service';
 import { map, mergeMap } from 'rxjs/operators';
 import { EpicDialogComponent } from '../../shared/creation-dialogs/components/epic-dialog/epic-dialog.component';
-import { EpicDialogData } from '../../pages/epic/models';
-import { EpicDialogResult } from '../../pages/epic/models/epic-dialog';
+import { EpicDialogData } from '../../shared/creation-dialogs/models';
+import { EpicDialogResult } from '../../shared/creation-dialogs/models/epic-dialog';
 import { openEpicAddDialog } from '../actions/epic.actions';
 
 @Injectable()
