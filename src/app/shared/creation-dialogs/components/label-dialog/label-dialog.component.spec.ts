@@ -1,6 +1,6 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {LabelDialogComponent} from './label-dialog.component';
+import { LabelDialogComponent } from './label-dialog.component';
 
 describe('LabelDialogComponent', () => {
   let component: LabelDialogComponent;
