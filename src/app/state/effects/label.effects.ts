@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { openLabelAddDialog } from '../actions/label.actions';
 import { map, mergeMap } from 'rxjs/operators';
 import { LabelService } from '../services/label.service';
-import { LabelDialogComponent } from '../../pages/label/components/label-dialog/label-dialog.component';
+import { LabelDialogComponent } from '../../shared/creation-dialogs/components/label-dialog/label-dialog.component';
 import { LabelDialogData } from '../../pages/label/models';
 import { LabelDialogResult } from '../../pages/label/models/label-dialog';
 import { MatDialog } from '@angular/material/dialog';

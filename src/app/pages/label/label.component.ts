@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Label } from '@state';
 import { LabelService } from '../../state/services/label.service';
 import { MatDialog } from '@angular/material/dialog';
-import { LabelDialogComponent } from './components/label-dialog/label-dialog.component';
+import { LabelDialogComponent } from '../../shared/creation-dialogs/components/label-dialog/label-dialog.component';
 import { LabelDialogData } from './models';
 import { LabelDialogResult } from './models/label-dialog';
 

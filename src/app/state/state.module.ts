@@ -11,10 +11,8 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {SearchEffects} from './search/search.effects';
 import {ReactiveComponentModule} from '@ngrx/component';
 import {LabelEffects} from './effects/label.effects';
-import {MatDialogModule} from '@angular/material/dialog';
 import {EpicEffects} from './effects/epic.effects';
-
-const materialModules = [MatDialogModule];
+import {CreationDialogsModule} from "../shared/creation-dialogs/creation-dialogs.module";
 
 @NgModule({
   declarations: [],
@@ -30,7 +28,7 @@ const materialModules = [MatDialogModule];
       autoPause: true
     }),
     ReactiveComponentModule,
-    ...materialModules
+    CreationDialogsModule
   ],
   providers: [{ provide: DefaultDataServiceConfig, useValue: environment.serverConfig }]
 })

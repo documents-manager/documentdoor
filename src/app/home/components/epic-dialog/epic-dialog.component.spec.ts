@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EpicDialogComponent } from './epic-dialog.component';
+import {EpicDialogComponent} from './epic-dialog.component';
 
 describe('EpicDialogComponent', () => {
   let component: EpicDialogComponent;

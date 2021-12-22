@@ -2,10 +2,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { EpicService } from '../../state/services/epic.service';
 import { Observable } from 'rxjs';
 import { Epic } from '@state';
-import { delay, startWith } from 'rxjs/operators';
-import { WithLoadingPipe } from '../../core/pipes/with-loading.pipe';
 import { MatDialog } from '@angular/material/dialog';
-import { EpicDialogComponent } from './components/epic-dialog/epic-dialog.component';
+import { EpicDialogComponent } from '../../shared/creation-dialogs/components/epic-dialog/epic-dialog.component';
 import { EpicDialogData } from './models';
 import { EpicDialogResult } from './models/epic-dialog';
 
