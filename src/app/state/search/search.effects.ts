@@ -10,10 +10,10 @@ export class SearchEffects {
   search$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(search),
-      mergeMap((action) =>
+      mergeMap(action =>
         this.searchService.search(action.term).pipe(
-          map((results) => searchSuccess({ results })),
-          catchError((error) => of(searchFailure({ error })))
+          map(results => searchSuccess({ results })),
+          catchError(error => of(searchFailure({ error })))
         )
       )
     );

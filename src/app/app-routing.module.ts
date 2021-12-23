@@ -4,18 +4,18 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: 'dashboard',
-    loadChildren: () => import('./modules/dashboard/dashboard.module').then((m) => m.DashboardModule)
+    loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule)
   },
   {
     path: 'epic',
-    loadChildren: () => import('./modules/epic/epic.module').then((m) => m.EpicModule)
+    loadChildren: () => import('./pages/epic/epic.module').then(m => m.EpicModule)
   },
   {
     path: '',
     pathMatch: 'full',
     redirectTo: 'dashboard'
   },
-  { path: 'label', loadChildren: () => import('./modules/label/label.module').then((m) => m.LabelModule) }
+  { path: 'label', loadChildren: () => import('./pages/label/label.module').then(m => m.LabelModule) }
 ];
 
 @NgModule({

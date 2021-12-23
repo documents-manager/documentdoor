@@ -1,18 +1,12 @@
 <div class="header" fxLayout="row" fxLayoutAlign="space-between center">
-  <h1>Labels</h1>
-  <button mat-fab color="primary" (click)="onAddLabel()">
-    <mat-icon>add</mat-icon>
-  </button>
+  <h1>Epics</h1>
 </div>
 
-<ng-container *ngIf="labels$ | withLoading | ngrxPush as state">
+<ng-container *ngIf="epics$ | withLoading | ngrxPush as state">
   <ng-container *ngIf="state.value">
     <div>
-      <app-label-list
-        [labels]="state.value"
-        (editClicked)="onEditLabel($event)"
-        (deleteClicked)="onDeleteLabel($event)"
-      ></app-label-list>
+      <app-epic-list (deleteClicked)="onDeleteEpic($event)" (editClicked)="onEditEpic($event)"
+                     [epics]="state.value"></app-epic-list>
     </div>
   </ng-container>
   <ng-container *ngIf="state.error"> Error {{ state.error }} </ng-container>

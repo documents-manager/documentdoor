@@ -10,10 +10,7 @@ describe('LabelEffects', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        LabelEffects,
-        provideMockActions(() => actions$)
-      ]
+      providers: [LabelEffects, provideMockActions(() => actions$)]
     });
 
     effects = TestBed.inject(LabelEffects);

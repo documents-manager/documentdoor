@@ -1,32 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { openAddDialog } from '../actions/label.actions';
-import { map, mergeMap, switchMap } from 'rxjs/operators';
+import { openLabelAddDialog } from '../actions/label.actions';
+import { map, mergeMap } from 'rxjs/operators';
 import { LabelService } from '../services/label.service';
-import { LabelDialogComponent } from '../../modules/label/components/label-dialog/label-dialog.component';
-import { LabelDialogData } from '../../modules/label/models';
-import { LabelDialogResult } from '../../modules/label/models/label-dialog';
+import { LabelDialogComponent } from '../../pages/label/components/label-dialog/label-dialog.component';
+import { LabelDialogData } from '../../pages/label/models';
+import { LabelDialogResult } from '../../pages/label/models/label-dialog';
 import { MatDialog } from '@angular/material/dialog';
-import { EMPTY } from 'rxjs';
 
 @Injectable()
 export class LabelEffects {
   openAddDiallog$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(openAddDialog),
+        ofType(openLabelAddDialog),
         mergeMap(() => {
-          const dialogRef = this.dialog.open<LabelDialogComponent, LabelDialogData, LabelDialogResult>(
-            LabelDialogComponent,
-            {
-              data: {
-                case: 'add'
-              }
+          const dialogRef = this.dialog.open<LabelDialogComponent, LabelDialogData, LabelDialogResult>(LabelDialogComponent, {
+            data: {
+              case: 'add'
             }
-          );
+          });
 
           return dialogRef.afterClosed().pipe(
-            map((result) => {
+            map(result => {
               if (result?.ok && result.label) {
                 this.labelService.add(result?.label);
                 this.labelService.getAll();
@@ -38,9 +34,5 @@ export class LabelEffects {
     { dispatch: false }
   );
 
-  constructor(
-    private readonly actions$: Actions,
-    private readonly labelService: LabelService,
-    private readonly dialog: MatDialog
-  ) {}
+  constructor(private readonly actions$: Actions, private readonly labelService: LabelService, private readonly dialog: MatDialog) {}
 }

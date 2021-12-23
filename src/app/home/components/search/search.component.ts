@@ -10,7 +10,7 @@ import { debounceTime } from 'rxjs/operators';
   encapsulation: ViewEncapsulation.None
 })
 export class SearchComponent {
-  @Input() term = '';
+  @Input() term: string | undefined = '';
   @Output() searchTermChanged: Observable<string>;
   searchFormControl = new FormControl();
   constructor() {

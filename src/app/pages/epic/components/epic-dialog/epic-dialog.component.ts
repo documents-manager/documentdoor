@@ -12,10 +12,7 @@ import { EpicDialogResult } from '../../models/epic-dialog';
 })
 export class EpicDialogComponent {
   epic: Epic;
-  constructor(
-    public dialogRef: MatDialogRef<EpicDialogComponent, EpicDialogResult>,
-    @Inject(MAT_DIALOG_DATA) public data: EpicDialogData
-  ) {
+  constructor(public dialogRef: MatDialogRef<EpicDialogComponent, EpicDialogResult>, @Inject(MAT_DIALOG_DATA) public data: EpicDialogData) {
     if (data.case === 'add') {
       this.epic = {
         name: ''

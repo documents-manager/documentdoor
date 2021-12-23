@@ -23,21 +23,6 @@ export class EpicComponent {
     this.epicService.getAll();
   }
 
-  onAddEpic() {
-    const dialogRef = this.dialog.open<EpicDialogComponent, EpicDialogData, EpicDialogResult>(EpicDialogComponent, {
-      data: {
-        case: 'add'
-      }
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result?.ok && result.epic) {
-        this.epicService.add(result?.epic);
-        this.epicService.getAll();
-      }
-    });
-  }
-
   onEditEpic(epic: Epic) {
     const dialogRef = this.dialog.open<EpicDialogComponent, EpicDialogData, EpicDialogResult>(EpicDialogComponent, {
       data: {
@@ -46,7 +31,7 @@ export class EpicComponent {
       }
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(result => {
       if (result?.ok && result.epic) {
         this.epicService.update(result?.epic);
       }
