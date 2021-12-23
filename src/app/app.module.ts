@@ -30,7 +30,6 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { CreateEntityMenuComponent } from './home/components/create-entity-menu/create-entity-menu.component';
-import { MatTreeModule } from '@angular/material/tree';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, SearchComponent, CreateEntityMenuComponent],
@@ -64,8 +63,7 @@ import { MatTreeModule } from '@angular/material/tree';
     MatInputModule,
     ReactiveFormsModule,
     ReactiveComponentModule,
-    ExtendedModule,
-    MatTreeModule
+    ExtendedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
