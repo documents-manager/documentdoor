@@ -10,7 +10,7 @@
         <mat-form-field appearance="fill">
             <mat-label>Epic</mat-label>
 
-            <mat-chip-list #epicList aria-label="Epic selection">
+            <mat-chip-list #epicList aria-label="Epicausahl">
                 <mat-chip
                         (removed)="removeEpic()"
                         *ngIf="selectedEpic">
@@ -36,7 +36,7 @@
 
         <mat-form-field appearance="fill" class="example-chip-list">
             <mat-label>Labels</mat-label>
-            <mat-chip-list #labelList aria-label="Fruit selection">
+            <mat-chip-list #labelList aria-label="Labelauswahl">
                 <mat-chip
                         (removed)="removeLabel(label)"
                         *ngFor="let label of selectedLabels">
@@ -65,10 +65,16 @@
             <textarea formControlName="description" matInput rows="3"></textarea>
         </mat-form-field>
 
+        <mat-divider></mat-divider>
 
+        <div>
+            <app-file-upload [deleteUri]="deleteUri" [uploadUri]="uploadUri"></app-file-upload>
+        </div>
+
+        <mat-divider></mat-divider>
     </form>
 </div>
 <div mat-dialog-actions>
     <button (click)="onNoClick()" mat-button>Abbrechen</button>
-    <button (click)="onSaveClick()" mat-button>Speichern</button>
+    <button (click)="onSaveClick()" [disabled]="form.invalid" mat-button>Speichern</button>
 </div>

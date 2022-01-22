@@ -25,7 +25,8 @@ export class DocumentEffects {
                   data: {
                     epics,
                     labels
-                  }
+                  },
+                  disableClose: true
                 }
               );
 

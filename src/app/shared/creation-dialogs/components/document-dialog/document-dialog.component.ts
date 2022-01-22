@@ -7,6 +7,7 @@ import { debounceTime, map, startWith } from 'rxjs/operators';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Epic, Label } from '@state';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-document-dialog',
@@ -21,6 +22,9 @@ export class DocumentDialogComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   filteredEpics$!: Observable<Epic[]>;
   filteredLabels$!: Observable<Label[]>;
+
+  deleteUri = environment.serverConfig.root + '/staging';
+  uploadUri = environment.serverConfig.root + '/staging';
 
   @ViewChild('epicInput') epicInput!: ElementRef<HTMLInputElement>;
   @ViewChild('labelInput') labelInput!: ElementRef<HTMLInputElement>;
@@ -139,4 +143,6 @@ export class DocumentDialogComponent implements OnInit {
   private _epicMatches(epic: Epic, filterValue: string) {
     return epic.name.includes(filterValue);
   }
+
+  addAsset() {}
 }

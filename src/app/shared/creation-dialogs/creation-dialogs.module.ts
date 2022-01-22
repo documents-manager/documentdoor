@@ -12,6 +12,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { FlexModule } from '@angular/flex-layout';
+import { MatDividerModule } from '@angular/material/divider';
+import { FileUploadModule } from '../file-upload/file-upload.module';
 
 const components = [EpicDialogComponent, LabelDialogComponent, DocumentDialogComponent];
 
@@ -28,7 +30,9 @@ const components = [EpicDialogComponent, LabelDialogComponent, DocumentDialogCom
     MatAutocompleteModule,
     MatChipsModule,
     MatIconModule,
-    FlexModule
+    FlexModule,
+    MatDividerModule,
+    FileUploadModule
   ],
   exports: components
 })
