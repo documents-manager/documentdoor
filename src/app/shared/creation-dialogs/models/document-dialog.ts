@@ -1,6 +1,11 @@
-import { Document } from '@state';
+import { Document, Epic, Label } from '@state';
 
 export interface DocumentDialogResult {
   ok: boolean;
-  epic: Document | undefined;
+  document: Document | undefined;
+}
+
+export interface DocumentDialogData {
+  labels: Label[];
+  epics: Epic[];
 }

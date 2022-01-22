@@ -1,1 +1,74 @@
-<p>document-dialog works!</p>
+<h1 mat-dialog-title>Document erstellen</h1>
+<div mat-dialog-content>
+    <form [formGroup]="form" class="form" fxLayout="column">
+        <mat-form-field appearance="fill">
+            <mat-label>Title</mat-label>
+            <input cdkFocusInitial formControlName="title" matInput/>
+            <mat-error *ngIf="hasRequiredError('title')">Titel ist verpflichtend</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Epic</mat-label>
+
+            <mat-chip-list #epicList aria-label="Epic selection">
+                <mat-chip
+                        (removed)="removeEpic()"
+                        *ngIf="selectedEpic">
+                    {{selectedEpic.name}}
+                    <button matChipRemove>
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </mat-chip>
+                <input
+                    #epicInput
+                    [matAutocomplete]="epicAuto"
+                    [matChipInputFor]="epicList"
+                    formControlName="epic"
+                    placeholder="Suche..."
+                >
+            </mat-chip-list>
+            <mat-autocomplete #epicAuto="matAutocomplete" (optionSelected)="selectEpic($event)" autoActiveFirstOption>
+                <mat-option *ngFor="let epic of filteredEpics$ | async" [value]="epic">
+                    {{epic.name}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="example-chip-list">
+            <mat-label>Labels</mat-label>
+            <mat-chip-list #labelList aria-label="Fruit selection">
+                <mat-chip
+                        (removed)="removeLabel(label)"
+                        *ngFor="let label of selectedLabels">
+                    {{label.name}}
+                    <button matChipRemove>
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </mat-chip>
+                <input
+                    #labelInput
+                    [matAutocomplete]="labelAuto"
+                    [matChipInputFor]="labelList"
+                    formControlName="label"
+                    placeholder="Suche..."
+                >
+            </mat-chip-list>
+            <mat-autocomplete #labelAuto="matAutocomplete" (optionSelected)="selectLabel($event)" autoActiveFirstOption>
+                <mat-option *ngFor="let label of filteredLabels$ | async" [value]="label">
+                    {{label.name}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Beschreibung</mat-label>
+            <textarea formControlName="description" matInput rows="3"></textarea>
+        </mat-form-field>
+
+
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button (click)="onNoClick()" mat-button>Abbrechen</button>
+    <button (click)="onSaveClick()" mat-button>Speichern</button>
+</div>

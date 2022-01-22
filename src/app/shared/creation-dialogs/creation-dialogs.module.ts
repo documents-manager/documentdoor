@@ -5,14 +5,31 @@ import { LabelDialogComponent } from './components/label-dialog/label-dialog.com
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DocumentDialogComponent } from './components/document-dialog/document-dialog.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
+import { FlexModule } from '@angular/flex-layout';
 
 const components = [EpicDialogComponent, LabelDialogComponent, DocumentDialogComponent];
 
 @NgModule({
   declarations: components,
-  imports: [CommonModule, MatDialogModule, MatFormFieldModule, MatButtonModule, FormsModule],
+  imports: [
+    CommonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    MatChipsModule,
+    MatIconModule,
+    FlexModule
+  ],
   exports: components
 })
 export class CreationDialogsModule {}

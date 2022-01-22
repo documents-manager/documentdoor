@@ -1,11 +1,12 @@
-import { EntityMetadataMap, EntityDataModuleConfig } from '@ngrx/data';
+import { EntityDataModuleConfig, EntityMetadataMap } from '@ngrx/data';
 
 const entityMetadata: EntityMetadataMap = {
   Epic: {},
-  Label: {}
+  Label: {},
+  Document: {}
 };
 
-const pluralNames = { Epic: 'Epic', Label: 'Label' };
+const pluralNames = { Epic: 'Epic', Label: 'Label', Document: 'Document' };
 
 export const entityConfig: EntityDataModuleConfig = {
   entityMetadata,
