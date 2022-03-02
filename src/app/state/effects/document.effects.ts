@@ -12,7 +12,7 @@ import { combineLatest } from 'rxjs';
 
 @Injectable()
 export class DocumentEffects {
-  openAddDiallog$ = createEffect(
+  openAddDialog$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(openDocumentDialog),
@@ -32,7 +32,9 @@ export class DocumentEffects {
 
               return dialogRef.afterClosed().pipe(
                 map(result => {
+                  console.log(this.documentService);
                   if (result?.ok && result.document) {
+                    this.documentService.getAll();
                     this.documentService.add(result?.document);
                   }
                 })

@@ -1,7 +1,13 @@
-import { DocumentList } from '@state';
+import {DocumentLink, DocumentList} from '@state';
 
-export interface SearchResult {
-  documents?: SearchEntityResult<DocumentList>;
+export interface SearchResult extends QueryResult<DocumentList> {
+}
+
+export interface AutocompleteResult extends QueryResult<DocumentLink> {
+}
+
+export interface QueryResult<T> {
+  documents?: SearchEntityResult<T>;
 }
 
 export interface SearchEntityResult<T> {

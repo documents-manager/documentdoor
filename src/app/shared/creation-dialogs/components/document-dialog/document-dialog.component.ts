@@ -18,6 +18,7 @@ import { environment } from '../../../../../environments/environment';
 export class DocumentDialogComponent implements OnInit {
   form: FormGroup;
   references: FormArray;
+  files: FormArray;
   selectedLabels: Label[] = [];
   selectedEpic: Epic | undefined = undefined;
   separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -37,12 +38,14 @@ export class DocumentDialogComponent implements OnInit {
     private changeDetector: ChangeDetectorRef
   ) {
     this.references = this.fb.array([]);
+    this.files = this.fb.array([], Validators.required);
     this.form = this.fb.group({
       title: ['', [Validators.required]],
       description: [''],
-      label: [''],
-      epic: [''],
-      references: this.references
+      label: [null],
+      epic: [null],
+      references: this.references,
+      files: this.files
     });
   }
 
@@ -64,8 +67,20 @@ export class DocumentDialogComponent implements OnInit {
   }
 
   onSaveClick() {
-    const data = this.form.value;
-    this.dialogRef.close(data);
+    const document = this.createDocumentDto();
+    this.dialogRef.close({
+      ok: true,
+      document
+    });
+  }
+
+  private createDocumentDto() {
+    const { label, ...rest } = this.form.value;
+    return {
+      ...rest,
+      epic: this.selectedEpic,
+      labels: this.selectedLabels
+    };
   }
 
   hasRequiredError(key: string) {

@@ -6,7 +6,7 @@ const entityMetadata: EntityMetadataMap = {
   Document: {}
 };
 
-const pluralNames = { Epic: 'Epic', Label: 'Label', Document: 'Document' };
+const pluralNames = { Document: 'Documents', Epic: 'Epics', Label: 'Labels' };
 
 export const entityConfig: EntityDataModuleConfig = {
   entityMetadata,

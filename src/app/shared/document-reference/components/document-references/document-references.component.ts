@@ -17,10 +17,14 @@ export class DocumentReferencesComponent implements OnInit {
 
   addReference() {
     const group = this.fb.group({
-      type: [DocumentReferenceType.MENTION, [Validators.required]],
-      document: ['', [Validators.required]]
+      referenceType: [DocumentReferenceType.MENTION, [Validators.required]],
+      targetDocument: ['', [Validators.required]]
     });
     this.references.push(group);
     this.changeDetector.detectChanges();
+  }
+
+  removeControl(index: number) {
+    this.references.removeAt(index);
   }
 }

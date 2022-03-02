@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './reducers';
-import { DefaultDataServiceConfig, EntityDataModule } from '@ngrx/data';
+import { DefaultDataServiceConfig, EntityDataModule, HttpUrlGenerator } from '@ngrx/data';
 import { entityConfig } from './entity-metadata';
 import { EffectsModule } from '@ngrx/effects';
 import { environment } from '../../environments/environment';
@@ -14,6 +14,7 @@ import { LabelEffects } from './effects/label.effects';
 import { EpicEffects } from './effects/epic.effects';
 import { CreationDialogsModule } from '../shared/creation-dialogs/creation-dialogs.module';
 import { DocumentEffects } from './effects/document.effects';
+import { PluralHttpUrlGenerator } from './http-url.generator';
 
 @NgModule({
   declarations: [],
@@ -31,6 +32,9 @@ import { DocumentEffects } from './effects/document.effects';
     ReactiveComponentModule,
     CreationDialogsModule
   ],
-  providers: [{ provide: DefaultDataServiceConfig, useValue: environment.serverConfig }]
+  providers: [
+    { provide: DefaultDataServiceConfig, useValue: environment.serverConfig },
+    { provide: HttpUrlGenerator, useClass: PluralHttpUrlGenerator }
+  ]
 })
 export class StateModule {}
