@@ -24,8 +24,14 @@ export class HomeComponent {
 
   constructor(private readonly store: Store, private readonly breakpointObserver: BreakpointObserver) {}
 
-  onSearchTermChanged(term: string) {
-    this.store.dispatch(search({ term }));
+  onSearchTermChanged(query: string) {
+    this.store.dispatch(
+      search({
+        request: {
+          query
+        }
+      })
+    );
   }
 
   addLabelClicked() {

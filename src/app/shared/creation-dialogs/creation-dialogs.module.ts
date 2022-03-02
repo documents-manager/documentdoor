@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FlexModule } from '@angular/flex-layout';
 import { MatDividerModule } from '@angular/material/divider';
 import { FileUploadModule } from '../file-upload/file-upload.module';
+import { DocumentReferenceModule } from '../document-reference/document-reference.module';
 
 const components = [EpicDialogComponent, LabelDialogComponent, DocumentDialogComponent];
 
@@ -32,7 +33,8 @@ const components = [EpicDialogComponent, LabelDialogComponent, DocumentDialogCom
     MatIconModule,
     FlexModule,
     MatDividerModule,
-    FileUploadModule
+    FileUploadModule,
+    DocumentReferenceModule
   ],
   exports: components
 })

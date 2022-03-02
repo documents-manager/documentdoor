@@ -1,5 +1,5 @@
-import { Action, createReducer, on } from '@ngrx/store';
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import { createReducer, on } from '@ngrx/store';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { SearchResult } from './search.model';
 import * as SearchActions from './search.actions';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -28,7 +28,7 @@ export const searchReducer = createReducer(
     SearchActions.search,
     (state, action): SearchState => ({
       ...state,
-      term: action.term,
+      term: action.request.query,
       loading: true
     })
   ),

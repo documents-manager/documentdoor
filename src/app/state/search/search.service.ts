@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { SearchResult } from './search.model';
+import { Observable } from 'rxjs';
+import { SearchRequest, SearchResult } from './search.model';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  search(term: string): Observable<SearchResult[]> {
-    return of([]);
+  search(request: SearchRequest): Observable<SearchResult[]> {
+    return this.http.post<SearchResult[]>(environment.serverConfig.root + '/search', request);
   }
 }

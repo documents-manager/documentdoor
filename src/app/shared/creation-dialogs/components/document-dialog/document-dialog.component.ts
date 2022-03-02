@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DocumentDialogData, DocumentDialogResult } from '../../models/document-dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { debounceTime, map, startWith } from 'rxjs/operators';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
@@ -17,6 +17,7 @@ import { environment } from '../../../../../environments/environment';
 })
 export class DocumentDialogComponent implements OnInit {
   form: FormGroup;
+  references: FormArray;
   selectedLabels: Label[] = [];
   selectedEpic: Epic | undefined = undefined;
   separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -32,25 +33,26 @@ export class DocumentDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DocumentDialogComponent, DocumentDialogResult>,
     @Inject(MAT_DIALOG_DATA) public data: DocumentDialogData,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private changeDetector: ChangeDetectorRef
   ) {
+    this.references = this.fb.array([]);
     this.form = this.fb.group({
       title: ['', [Validators.required]],
       description: [''],
       label: [''],
       epic: [''],
-      assets: this.fb.array([]),
-      references: this.fb.array([])
+      references: this.references
     });
   }
 
   ngOnInit(): void {
     this.filteredEpics$ = this.form.get('epic')!.valueChanges.pipe(
-      startWith(null),
+      startWith(''),
       map(value => this._filterEpics(typeof value === 'string' ? value : value?.name))
     );
     this.filteredLabels$ = this.form.get('label')!.valueChanges.pipe(
-      startWith(null),
+      startWith(''),
       debounceTime(10),
       map(label => this._filterLabels(typeof label === 'string' ? label : label?.name))
     );
@@ -143,6 +145,4 @@ export class DocumentDialogComponent implements OnInit {
   private _epicMatches(epic: Epic, filterValue: string) {
     return epic.name.includes(filterValue);
   }
-
-  addAsset() {}
 }

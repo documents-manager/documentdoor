@@ -3,7 +3,7 @@
     <form [formGroup]="form" class="form" fxLayout="column">
         <mat-form-field appearance="fill">
             <mat-label>Title</mat-label>
-            <input cdkFocusInitial formControlName="title" matInput/>
+            <input formControlName="title" matInput/>
             <mat-error *ngIf="hasRequiredError('title')">Titel ist verpflichtend</mat-error>
         </mat-form-field>
 
@@ -14,7 +14,7 @@
                 <mat-chip
                         (removed)="removeEpic()"
                         *ngIf="selectedEpic">
-                    {{selectedEpic.name}}
+                    {{selectedEpic?.name}}
                     <button matChipRemove>
                         <mat-icon>cancel</mat-icon>
                     </button>
@@ -72,6 +72,11 @@
         </div>
 
         <mat-divider></mat-divider>
+
+        <div>
+            <app-document-references [references]="references"></app-document-references>
+        </div>
+        -->
     </form>
 </div>
 <div mat-dialog-actions>

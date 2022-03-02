@@ -1,8 +1,8 @@
 import { createAction, props } from '@ngrx/store';
-import { SearchResult } from './search.model';
+import { SearchRequest, SearchResult } from './search.model';
 import { HttpErrorResponse } from '@angular/common/http';
 
-export const search = createAction('[Search/Page] Search Searchs', props<{ term: string }>());
+export const search = createAction('[Search/Page] Search Searchs', props<{ request: SearchRequest }>());
 
 export const searchSuccess = createAction('[Search/API] Search Success', props<{ results: SearchResult[] }>());
 
