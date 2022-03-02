@@ -48,14 +48,15 @@ export class DocumentDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.filteredEpics$ = this.form.get('epic')!.valueChanges.pipe(
-      startWith(''),
+      startWith(null),
       map(value => this._filterEpics(typeof value === 'string' ? value : value?.name))
     );
     this.filteredLabels$ = this.form.get('label')!.valueChanges.pipe(
-      startWith(''),
+      startWith(null),
       debounceTime(10),
       map(label => this._filterLabels(typeof label === 'string' ? label : label?.name))
     );
+    this.changeDetector.detectChanges();
   }
 
   onNoClick() {

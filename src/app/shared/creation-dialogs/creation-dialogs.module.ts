@@ -23,7 +23,6 @@ const components = [EpicDialogComponent, LabelDialogComponent, DocumentDialogCom
   imports: [
     CommonModule,
     MatDialogModule,
-    MatFormFieldModule,
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -34,7 +33,8 @@ const components = [EpicDialogComponent, LabelDialogComponent, DocumentDialogCom
     FlexModule,
     MatDividerModule,
     FileUploadModule,
-    DocumentReferenceModule
+    DocumentReferenceModule,
+    MatFormFieldModule,
   ],
   exports: components
 })

@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Document erstellen</h1>
 <div mat-dialog-content>
-    <form [formGroup]="form" class="form" fxLayout="column">
+    <div [formGroup]="form" class="form" fxLayout="column">
         <mat-form-field appearance="fill">
             <mat-label>Title</mat-label>
             <input formControlName="title" matInput/>
@@ -40,7 +40,7 @@
                 <mat-chip
                         (removed)="removeLabel(label)"
                         *ngFor="let label of selectedLabels">
-                    {{label.name}}
+                    {{label?.name}}
                     <button matChipRemove>
                         <mat-icon>cancel</mat-icon>
                     </button>
@@ -55,7 +55,7 @@
             </mat-chip-list>
             <mat-autocomplete #labelAuto="matAutocomplete" (optionSelected)="selectLabel($event)" autoActiveFirstOption>
                 <mat-option *ngFor="let label of filteredLabels$ | async" [value]="label">
-                    {{label.name}}
+                    {{label?.name}}
                 </mat-option>
             </mat-autocomplete>
         </mat-form-field>
@@ -76,8 +76,7 @@
         <div>
             <app-document-references [references]="references"></app-document-references>
         </div>
-        -->
-    </form>
+    </div>
 </div>
 <div mat-dialog-actions>
     <button (click)="onNoClick()" mat-button>Abbrechen</button>
