@@ -1,7 +1,113 @@
 <div class="searchContainer">
-  <mat-form-field [formControl]="searchFormControl" ngDefaultControl appearance="fill">
+  <mat-form-field
+    #origin="cdkOverlayOrigin"
+    (keydown.enter)="search()"
+    [class.drop-down-input-active]="showPanel$ | async"
+    appearance="fill"
+    cdkOverlayOrigin
+    class="drop-down-input"
+    ngDefaultControl
+  >
     <mat-label>Suche</mat-label>
-    <input autocomplete="off" matInput placeholder="" />
+    <input [formControl]="searchFormControl" autocomplete="off" matInput placeholder="" />
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
 </div>
+
+<ng-template
+  [cdkConnectedOverlayOffsetY]="-1"
+  [cdkConnectedOverlayOpen]="(showPanel$ | async) ?? false"
+  [cdkConnectedOverlayOrigin]="origin"
+  cdkConnectedOverlay
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  cdkConnectedOverlayHasBackdrop
+>
+  <section class="drop-down-panel mat-elevation-z1">
+    <mat-nav-list
+      *ngIf="
+        autocompletion &&
+          (autocompletion?.document?.hitCount ?? 0) + (autocompletion?.label?.hitCount ?? 0) + (autocompletion?.epic?.hitCount ?? 0) > 0;
+        else hint
+      "
+    >
+      <ng-container *ngIf="autocompletion?.document?.hitCount ?? 0 > 0">
+        <div mat-subheader>Documents</div>
+        <a
+          *ngFor="let document of autocompletion?.document?.hits"
+          [queryParams]="{ document: document.id }"
+          [routerLink]="['/', 'search']"
+          mat-list-item
+        >
+          <mat-icon mat-list-icon>article</mat-icon>
+          <div mat-line>
+            <div fxLayout fxLayoutAlign="space-between ">
+              <span>{{ document.title }}</span>
+              <span>ID: {{ document.id }}</span>
+            </div>
+
+            <div class="asset-chip-list" mat-line>
+              <mat-chip-list>
+                <mat-chip (click)="onAssetClicked(document.id, asset.id)" *ngFor="let asset of document.assets">
+                  <mat-chip-avatar>
+                    <mat-icon>picture_as_pdf</mat-icon>
+                  </mat-chip-avatar>
+                  {{ asset.fileName }}
+                </mat-chip>
+              </mat-chip-list>
+            </div>
+          </div>
+        </a>
+        <mat-divider></mat-divider>
+      </ng-container>
+      <ng-container *ngIf="autocompletion?.epic?.hitCount ?? 0 > 0">
+        <div mat-subheader>Epics</div>
+        <mat-list-item>
+          <mat-chip-list>
+            <mat-chip
+              *ngFor="let epic of autocompletion?.epic?.hits"
+              [queryParams]="{ epic: epic.id }"
+              [routerLink]="['/', 'search']"
+              color="primary"
+              selected
+              >{{ epic.name }}</mat-chip
+            >
+          </mat-chip-list>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </ng-container>
+
+      <ng-container *ngIf="autocompletion?.label?.hitCount ?? 0 > 0">
+        <div mat-subheader>Labels</div>
+        <mat-list-item>
+          <mat-chip-list>
+            <mat-chip
+              *ngFor="let label of autocompletion?.label?.hits"
+              [queryParams]="{ label: label.id }"
+              [routerLink]="['/', 'search']"
+              color="accent"
+              selected
+              >{{ label.name }}</mat-chip
+            >
+          </mat-chip-list>
+        </mat-list-item>
+      </ng-container>
+    </mat-nav-list>
+
+    <ng-template #hint>
+      <div fxLayout fxLayoutAlign="center center">
+        <span
+          *ngIf="
+            (autocompletion?.document?.hitCount ?? 0) + (autocompletion?.label?.hitCount ?? 0) + (autocompletion?.epic?.hitCount ?? 0) ===
+              0;
+            else typeHint
+          "
+        >
+          Keine Ergebnisse
+        </span>
+        <ng-template #typeHint>
+          <span class="mat-hint">Tippen zum Suchen</span>
+        </ng-template>
+      </div>
+    </ng-template>
+  </section>
+</ng-template>

@@ -30,7 +30,7 @@ export class DocumentReferenceComponent implements OnInit {
           return of([]);
         }
 
-        return this.searchService.autocomplete(query).pipe(map(autocomplete => autocomplete.documents?.hits ?? []));
+        return this.searchService.autocomplete(query).pipe(map(autocomplete => autocomplete.document?.hits ?? []));
       })
     );
   }

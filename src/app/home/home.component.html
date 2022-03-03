@@ -9,11 +9,14 @@
       [opened]="!handset.matches"
     >
       <mat-toolbar color="primary" class="toolbar">
-        <a routerLink="/"><img alt="logo" class="logo" src="assets/logos/white.svg"/></a>
+        <a routerLink="/"><img alt="logo" class="logo" src="assets/logos/white.svg" /></a>
       </mat-toolbar>
       <div class="new-button-container">
-        <app-create-entity-menu (addDocumentClicked)="addDocumentClicked()" (addEpicClicked)="addEpicClicked()"
-                                (addLabelClicked)="addLabelClicked()"></app-create-entity-menu>
+        <app-create-entity-menu
+          (addDocumentClicked)="addDocumentClicked()"
+          (addEpicClicked)="addEpicClicked()"
+          (addLabelClicked)="addLabelClicked()"
+        ></app-create-entity-menu>
       </div>
       <mat-nav-list>
         <a mat-list-item [routerLink]="['/', 'dashboard']" [routerLinkActive]="['active']">Dashboard</a>
@@ -24,8 +27,7 @@
     <mat-sidenav-content>
       <mat-toolbar class="primary-toolbar toolbar" color="primary" fxLayout="row" fxLayoutAlign=" center">
         <div fxFlex="nogrow">
-          <button (click)="drawer.toggle()" *ngIf="handset.matches" aria-label="Toggle sidenav" mat-icon-button
-                  type="button">
+          <button (click)="drawer.toggle()" *ngIf="handset.matches" aria-label="Toggle sidenav" mat-icon-button type="button">
             <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
           </button>
         </div>
@@ -35,7 +37,9 @@
             fxFlex="50"
             fxFlex.lt-md="100"
             [term]="term$ | ngrxPush"
+            (searchSubmit)="onSearchSubmit($event)"
             (searchTermChanged)="onSearchTermChanged($event)"
+            [autocompletion]="autocompletion$ | ngrxPush"
           ></app-search>
         </div>
       </mat-toolbar>

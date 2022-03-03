@@ -15,6 +15,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [HomeComponent, CreateEntityMenuComponent, SearchComponent],
@@ -33,7 +35,9 @@ import { MatInputModule } from '@angular/material/input';
     MatToolbarModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    OverlayModule,
+    MatChipsModule
   ]
 })
 export class HomeModule {}

@@ -9,6 +9,14 @@ import { StateModule } from './state/state.module';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { CoreModule } from './core/core.module';
 import { HomeModule } from './home/home.module';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { A11yModule } from '@angular/cdk/a11y';
+import { MatChipsModule } from '@angular/material/chips';
+import { ExtendedModule, FlexModule } from '@angular/flex-layout';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReactiveComponentModule } from '@ngrx/component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,7 +36,16 @@ import { HomeModule } from './home/home.module';
       theme: {
         'background-color': '#414247'
       }
-    })
+    }),
+    FlexModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    ReactiveComponentModule,
+    ExtendedModule,
+    OverlayModule,
+    A11yModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
