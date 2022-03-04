@@ -1,19 +1,20 @@
-import { Action, createReducer, on } from '@ngrx/store';
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import { createReducer, on } from '@ngrx/store';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { SearchResult } from './search.model';
 import * as SearchActions from './search.actions';
 import { HttpErrorResponse } from '@angular/common/http';
+import {DocumentList} from "@state";
 
 export const searchesFeatureKey = 'search';
 
-export interface SearchState extends EntityState<SearchResult> {
+export interface SearchState extends EntityState<DocumentList> {
   // additional entities state properties
   term: string;
   loading: boolean;
   error: HttpErrorResponse | null;
 }
 
-export const adapter: EntityAdapter<SearchResult> = createEntityAdapter<SearchResult>();
+export const adapter: EntityAdapter<DocumentList> = createEntityAdapter<DocumentList>();
 
 export const initialState: SearchState = adapter.getInitialState({
   // additional entity state properties
@@ -28,12 +29,12 @@ export const searchReducer = createReducer(
     SearchActions.search,
     (state, action): SearchState => ({
       ...state,
-      term: action.term,
+      term: action.request.query,
       loading: true
     })
   ),
   on(SearchActions.searchSuccess, (state, action) => ({
-    ...adapter.setAll(action.results, state),
+    ...adapter.setAll(action.results?.documents?.hits ?? [], state),
     loading: false,
     error: null
   })),

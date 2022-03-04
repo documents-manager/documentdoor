@@ -11,7 +11,7 @@ export class SearchEffects {
     return this.actions$.pipe(
       ofType(search),
       mergeMap(action =>
-        this.searchService.search(action.term).pipe(
+        this.searchService.search(action.request).pipe(
           map(results => searchSuccess({ results })),
           catchError(error => of(searchFailure({ error })))
         )

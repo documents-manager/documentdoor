@@ -1,3 +1,4 @@
-import { Epic } from './epic';
-import { Label } from './label';
-export { Epic, Label };
+export * from './epic';
+export * from './label';
+export * from './asset';
+export * from './document';

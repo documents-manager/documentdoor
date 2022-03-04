@@ -9,10 +9,11 @@
       [opened]="!handset.matches"
     >
       <mat-toolbar color="primary" class="toolbar">
-        <a href="/"><img class="logo" src="assets/logos/white.svg" alt="logo" /></a>
+        <a routerLink="/"><img alt="logo" class="logo" src="assets/logos/white.svg"/></a>
       </mat-toolbar>
       <div class="new-button-container">
-        <app-create-entity-menu (addLabelClicked)="addLabelClicked()" (addEpicClicked)="addEpicClicked()"></app-create-entity-menu>
+        <app-create-entity-menu (addDocumentClicked)="addDocumentClicked()" (addEpicClicked)="addEpicClicked()"
+                                (addLabelClicked)="addLabelClicked()"></app-create-entity-menu>
       </div>
       <mat-nav-list>
         <a mat-list-item [routerLink]="['/', 'dashboard']" [routerLinkActive]="['active']">Dashboard</a>

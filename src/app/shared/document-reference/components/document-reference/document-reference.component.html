@@ -1,0 +1,46 @@
+<div fxLayout="row" fxLayoutAlign="space-between center">
+  <div fxFlex fxLayout="row" fxLayoutGap="2rem">
+    <mat-form-field *ngIf="{ filteredDocuments: filteredDocuments$ | async } as val" appearance="fill">
+      <mat-label>Dokument</mat-label>
+
+      <mat-chip-list #epicList aria-label="Epicausahl">
+        <mat-chip (removed)="removeDocument()" *ngIf="$any(control.get('targetDocument')).value as document; else textInput">
+          {{ document?.title }}
+          <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+        <ng-template #textInput>
+          <input
+            #epicInput
+            [formControl]="documentTitleControl"
+            [matAutocomplete]="epicAuto"
+            [matChipInputFor]="epicList"
+            placeholder="Suche..."
+          />
+        </ng-template>
+      </mat-chip-list>
+      <mat-autocomplete
+        #epicAuto="matAutocomplete"
+        (optionSelected)="selectDocument($event, val.filteredDocuments ?? [])"
+        autoActiveFirstOption
+      >
+        <mat-option *ngFor="let epic of val.filteredDocuments" [value]="epic">
+          {{ epic.title }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Typ</mat-label>
+      <mat-select [formControl]="$any(control.get('referenceType'))" name="type">
+        <mat-option *ngFor="let type of types | enumToArray" [value]="type">
+          {{ type }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <button (click)="clearInputs()" mat-icon-button>
+    <mat-icon>clear</mat-icon>
+  </button>
+</div>
