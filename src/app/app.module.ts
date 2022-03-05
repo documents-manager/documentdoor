@@ -8,10 +8,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { StateModule } from './state/state.module';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { CoreModule } from './core/core.module';
+import { ExtendedModule, FlexModule } from '@angular/flex-layout';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveComponentModule } from '@ngrx/component';
+import { MatTreeModule } from '@angular/material/tree';
 import { HomeModule } from './home/home.module';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [AppComponent],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -28,7 +37,16 @@ import { HomeModule } from './home/home.module';
       theme: {
         'background-color': '#414247'
       }
-    })
+    }),
+    FlexModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    ReactiveComponentModule,
+    ExtendedModule,
+    MatTreeModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

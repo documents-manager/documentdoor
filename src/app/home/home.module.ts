@@ -15,9 +15,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { TreeNavComponent } from './components/tree-nav/tree-nav.component';
+import { MatTreeModule } from '@angular/material/tree';
 
 @NgModule({
-  declarations: [HomeComponent, CreateEntityMenuComponent, SearchComponent],
+  declarations: [HomeComponent, CreateEntityMenuComponent, SearchComponent, TreeNavComponent],
   exports: [HomeComponent],
   imports: [
     CommonModule,
@@ -33,7 +35,8 @@ import { MatInputModule } from '@angular/material/input';
     MatToolbarModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTreeModule
   ]
 })
 export class HomeModule {}
