@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { LabelDialogData } from '../../models';
+import { LabelDialogData } from '../../../../pages/label/models';
 import { Label } from '@state';
 import { LabelDialogResult } from '../../models/label-dialog';
 
@@ -12,6 +12,7 @@ import { LabelDialogResult } from '../../models/label-dialog';
 })
 export class LabelDialogComponent {
   label: Label;
+
   constructor(
     public dialogRef: MatDialogRef<LabelDialogComponent, LabelDialogResult>,
     @Inject(MAT_DIALOG_DATA) public data: LabelDialogData

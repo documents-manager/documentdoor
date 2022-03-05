@@ -19,8 +19,8 @@ import {TreeNode} from "./models";
 export class HomeComponent {
   term$: Observable<string> = this.store.select(searchTerm);
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-      map(result => result.matches),
-      shareReplay()
+    map(result => result.matches),
+    shareReplay()
   );
   data$: Observable<TreeNode[]>;
 
@@ -28,8 +28,14 @@ export class HomeComponent {
       this.data$ = this.navigationService.data$;
   }
 
-  onSearchTermChanged(term: string) {
-    this.store.dispatch(search({term}));
+  onSearchTermChanged(query: string) {
+    this.store.dispatch(
+      search({
+        request: {
+          query
+        }
+      })
+    );
   }
 
   addLabelClicked() {
@@ -38,5 +44,9 @@ export class HomeComponent {
 
   addEpicClicked() {
     this.store.dispatch(openEpicAddDialog());
+  }
+
+  addDocumentClicked() {
+    this.store.dispatch(openDocumentDialog());
   }
 }

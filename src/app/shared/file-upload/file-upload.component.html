@@ -1,0 +1,25 @@
+<input #fileUpload (change)="onFileSelected($any($event))"
+       [accept]="requiredFileType"
+       class="file-input"
+       multiple type="file">
+<div class="file-upload" fxLayout="row" fxLayoutAlign="space-between center">
+    <span>Assets hinzufügen</span>
+    <button (click)="fileUpload.click()" mat-icon-button>
+        <mat-icon>add</mat-icon>
+    </button>
+</div>
+
+<mat-list>
+    <mat-list-item *ngFor="let progress of uploadProgress | keyvalue">
+        <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+
+            <mat-progress-bar *ngIf="progress.value !== 100" [value]="progress.value"
+                              class="progress-bar" mode="determinate">
+            </mat-progress-bar>
+            <span *ngIf="progress.value === 100">{{progress.key}}</span>
+            <mat-icon (click)="cancelUpload(progress.key, progress.value === 100)" class="cancel-upload">
+                clear
+            </mat-icon>
+        </div>
+    </mat-list-item>
+</mat-list>

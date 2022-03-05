@@ -2,12 +2,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { EpicService } from '../../state/services/epic.service';
 import { Observable } from 'rxjs';
 import { Epic } from '@state';
-import { delay, startWith } from 'rxjs/operators';
-import { WithLoadingPipe } from '../../core/pipes/with-loading.pipe';
 import { MatDialog } from '@angular/material/dialog';
-import { EpicDialogComponent } from './components/epic-dialog/epic-dialog.component';
-import { EpicDialogData } from './models';
-import { EpicDialogResult } from './models/epic-dialog';
+import { EpicDialogComponent } from '../../shared/creation-dialogs/components/epic-dialog/epic-dialog.component';
+import { EpicDialogData } from '../../shared/creation-dialogs/models';
+import { EpicDialogResult } from '../../shared/creation-dialogs/models/epic-dialog';
+import { DocumentService } from '../../state/services/document.service';
 
 @Component({
   selector: 'app-epic',
@@ -18,9 +17,10 @@ import { EpicDialogResult } from './models/epic-dialog';
 export class EpicComponent {
   epics$: Observable<Epic[]>;
 
-  constructor(private epicService: EpicService, private dialog: MatDialog) {
+  constructor(private epicService: EpicService, private dialog: MatDialog, private documentService: DocumentService) {
     this.epics$ = epicService.entities$;
     this.epicService.getAll();
+    this.documentService.getAll();
   }
 
   onEditEpic(epic: Epic) {
