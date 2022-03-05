@@ -7,6 +7,8 @@ import {searchTerm} from '../state/search/search.selectors';
 import {search} from '../state/search/search.actions';
 import {openLabelAddDialog} from '../state/actions/label.actions';
 import {openEpicAddDialog} from '../state/actions/epic.actions';
+import {NavigationService} from "./services/navigation.service";
+import {TreeNode} from "./models";
 
 @Component({
   selector: 'app-home',
@@ -20,8 +22,10 @@ export class HomeComponent {
       map(result => result.matches),
       shareReplay()
   );
+  data$: Observable<TreeNode[]>;
 
-  constructor(private readonly store: Store, private readonly breakpointObserver: BreakpointObserver) {
+  constructor(private readonly store: Store, private readonly breakpointObserver: BreakpointObserver, private navigationService: NavigationService) {
+      this.data$ = this.navigationService.data$;
   }
 
   onSearchTermChanged(term: string) {

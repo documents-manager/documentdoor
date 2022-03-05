@@ -30,11 +30,11 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { CreateEntityMenuComponent } from './home/components/create-entity-menu/create-entity-menu.component';
-import { SideNavComponent } from './home/components/side-nav/side-nav.component';
+import { TreeNavComponent } from './home/components/tree-nav/tree-nav.component';
 import { MatTreeModule } from '@angular/material/tree';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, SearchComponent, CreateEntityMenuComponent, SideNavComponent],
+  declarations: [AppComponent, HomeComponent, SearchComponent, CreateEntityMenuComponent, TreeNavComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
