@@ -1,14 +1,15 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
-import {Observable} from 'rxjs';
-import {map, shareReplay} from 'rxjs/operators';
-import {Store} from '@ngrx/store';
-import {searchTerm} from '../state/search/search.selectors';
-import {search} from '../state/search/search.actions';
-import {openLabelAddDialog} from '../state/actions/label.actions';
-import {openEpicAddDialog} from '../state/actions/epic.actions';
-import {NavigationService} from "./services/navigation.service";
-import {TreeNode} from "./models";
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { searchTerm } from '../state/search/search.selectors';
+import { search } from '../state/search/search.actions';
+import { openLabelAddDialog } from '../state/actions/label.actions';
+import { openEpicAddDialog } from '../state/actions/epic.actions';
+import { NavigationService } from './services/navigation.service';
+import { TreeNode } from './models';
+import { openDocumentDialog } from '../state/actions/document.actions';
 
 @Component({
   selector: 'app-home',
@@ -24,8 +25,12 @@ export class HomeComponent {
   );
   data$: Observable<TreeNode[]>;
 
-  constructor(private readonly store: Store, private readonly breakpointObserver: BreakpointObserver, private navigationService: NavigationService) {
-      this.data$ = this.navigationService.data$;
+  constructor(
+    private readonly store: Store,
+    private readonly breakpointObserver: BreakpointObserver,
+    private navigationService: NavigationService
+  ) {
+    this.data$ = this.navigationService.data$;
   }
 
   onSearchTermChanged(query: string) {

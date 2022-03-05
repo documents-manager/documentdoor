@@ -9,18 +9,17 @@ import { StateModule } from './state/state.module';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { CoreModule } from './core/core.module';
 import { ExtendedModule, FlexModule } from '@angular/flex-layout';
-import { SearchComponent } from './home/components/search/search.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ReactiveComponentModule } from '@ngrx/component';
-import { CreateEntityMenuComponent } from './home/components/create-entity-menu/create-entity-menu.component';
-import { TreeNavComponent } from './home/components/tree-nav/tree-nav.component';
 import { MatTreeModule } from '@angular/material/tree';
 import { HomeModule } from './home/home.module';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, SearchComponent, CreateEntityMenuComponent, TreeNavComponent],
+  declarations: [AppComponent],
 
   imports: [
     BrowserModule,
@@ -45,7 +44,9 @@ import { HomeModule } from './home/home.module';
     ReactiveFormsModule,
     ReactiveComponentModule,
     ExtendedModule,
-    MatTreeModule
+    MatTreeModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
