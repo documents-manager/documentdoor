@@ -3,15 +3,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTreeModule } from '@angular/material/tree';
 
-import { SideNavComponent } from './side-nav.component';
+import { TreeNavComponent } from './tree-nav.component';
 
-describe('SideNavComponent', () => {
-  let component: SideNavComponent;
-  let fixture: ComponentFixture<SideNavComponent>;
+describe('TreeNavComponent', () => {
+  let component: TreeNavComponent;
+  let fixture: ComponentFixture<TreeNavComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SideNavComponent ],
+      declarations: [ TreeNavComponent ],
       imports: [
         MatButtonModule,
         MatIconModule,
@@ -21,7 +21,7 @@ describe('SideNavComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SideNavComponent);
+    fixture = TestBed.createComponent(TreeNavComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
