@@ -6,32 +6,28 @@ import { Observable, of as observableOf, merge } from 'rxjs';
 
 // TODO: Replace this with your own data model type
 export interface DocumentTableItem {
-  name: string;
   id: number;
+  title: string;
+  epic: string;
+  label: string,
+  lastupdated: string,
+  created: string,
 }
 
 // TODO: replace this with real data from your application
 const EXAMPLE_DATA: DocumentTableItem[] = [
-  {id: 1, name: 'Hydrogen'},
-  {id: 2, name: 'Helium'},
-  {id: 3, name: 'Lithium'},
-  {id: 4, name: 'Beryllium'},
-  {id: 5, name: 'Boron'},
-  {id: 6, name: 'Carbon'},
-  {id: 7, name: 'Nitrogen'},
-  {id: 8, name: 'Oxygen'},
-  {id: 9, name: 'Fluorine'},
-  {id: 10, name: 'Neon'},
-  {id: 11, name: 'Sodium'},
-  {id: 12, name: 'Magnesium'},
-  {id: 13, name: 'Aluminum'},
-  {id: 14, name: 'Silicon'},
-  {id: 15, name: 'Phosphorus'},
-  {id: 16, name: 'Sulfur'},
-  {id: 17, name: 'Chlorine'},
-  {id: 18, name: 'Argon'},
-  {id: 19, name: 'Potassium'},
-  {id: 20, name: 'Calcium'},
+  {id: 1, title: 'Rechnung Fahrrad', epic: 'Rechnung', label: 'Label', lastupdated: '05.01.2022', created: '05.01.2022'},
+  {id: 2, title: 'Rechnung Auto', epic: 'Rechnung', label: 'Label', lastupdated: '01.01.2022', created: '01.01.2022'},
+  {id: 3, title: 'Rechnung Haus', epic: 'Rechnung', label: 'Label', lastupdated: '01.01.2022', created: '01.01.2022'},
+  {id: 4, title: 'Rechnung Strom', epic: 'Rechnung', label: 'Label', lastupdated: '01.01.2022', created: '01.01.2022'},
+  {id: 5, title: 'Rechnung PC', epic: 'Rechnung', label: 'Label', lastupdated: '01.01.2022', created: '01.01.2022'},
+  {id: 6, title: 'Vorlesung Mathe', epic: 'Vorlesung', label: 'Label', lastupdated: '01.01.2022', created: '01.01.2022'},
+  {id: 7, title: 'Vorlesung Deutsch', epic: 'Vorlesung', label: 'Label', lastupdated: '01.01.2022', created: '01.01.2022'},
+  {id: 8, title: 'Vorlesung Englisch', epic: 'Vorlesung', label: 'Label', lastupdated: '01.01.2022', created: '01.01.2022'},
+  {id: 9, title: 'Vorlesung Spanisch', epic: 'Vorlesung', label: 'Label', lastupdated: '01.01.2022', created: '01.01.2022'},
+  {id: 10, title: 'Urkunde Bundesjugendspiele', epic: 'Urkunde', label: 'Label', lastupdated: '01.01.2022', created: '01.01.2022'},
+  {id: 11, title: 'Urkunde Kindergarten', epic: 'Urkunde', label: 'Label', lastupdated: '01.01.2022', created: '01.01.2022'},
+  {id: 12, title: 'Urkunde Feuerwehr', epic: 'Urkunde', label: 'Label', lastupdated: '01.01.2021', created: '01.01.2021'},
 ];
 
 /**
@@ -97,8 +93,12 @@ export class DocumentTableDataSource extends DataSource<DocumentTableItem> {
     return data.sort((a, b) => {
       const isAsc = this.sort?.direction === 'asc';
       switch (this.sort?.active) {
-        case 'name': return compare(a.name, b.name, isAsc);
         case 'id': return compare(+a.id, +b.id, isAsc);
+        case 'title': return compare(a.title, b.title, isAsc);
+        case 'epic': return compare(a.epic, b.epic, isAsc);
+        case 'label': return compare(a.label, b.label, isAsc);
+        case 'lastupdated': return compare(a.lastupdated, b.lastupdated, isAsc);
+        case 'created': return compare(a.created, b.created, isAsc);
         default: return 0;
       }
     });

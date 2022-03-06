@@ -6,6 +6,7 @@ import { DocumentTableComponent } from './document-table/document-table.componen
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import {MatFormFieldModule} from '@angular/material/form-field';  
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { MatSortModule } from '@angular/material/sort';
     TableRoutingModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatFormFieldModule
   ]
 })
 export class TableModule { }

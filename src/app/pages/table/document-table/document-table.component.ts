@@ -16,7 +16,7 @@ export class DocumentTableComponent implements AfterViewInit {
   dataSource: DocumentTableDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name'];
+  displayedColumns = ['id', 'title', 'epic', 'label', 'lastupdated', 'created'];
 
   constructor() {
     this.dataSource = new DocumentTableDataSource();
