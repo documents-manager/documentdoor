@@ -15,11 +15,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { TreeNavComponent } from './components/tree-nav/tree-nav.component';
+import { MatTreeModule } from '@angular/material/tree';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
-  declarations: [HomeComponent, CreateEntityMenuComponent, SearchComponent],
+  declarations: [HomeComponent, CreateEntityMenuComponent, SearchComponent, TreeNavComponent],
   exports: [HomeComponent],
   imports: [
     CommonModule,
@@ -36,6 +38,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
+    MatTreeModule,
     OverlayModule,
     MatChipsModule
   ]

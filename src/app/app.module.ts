@@ -8,18 +8,22 @@ import { HttpClientModule } from '@angular/common/http';
 import { StateModule } from './state/state.module';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { CoreModule } from './core/core.module';
+import { ExtendedModule, FlexModule } from '@angular/flex-layout';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveComponentModule } from '@ngrx/component';
+import { MatTreeModule } from '@angular/material/tree';
 import { HomeModule } from './home/home.module';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { A11yModule } from '@angular/cdk/a11y';
 import { MatChipsModule } from '@angular/material/chips';
-import { ExtendedModule, FlexModule } from '@angular/flex-layout';
-import { MatInputModule } from '@angular/material/input';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { ReactiveComponentModule } from '@ngrx/component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [AppComponent],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -45,7 +49,10 @@ import { ReactiveComponentModule } from '@ngrx/component';
     ExtendedModule,
     OverlayModule,
     A11yModule,
-    MatChipsModule
+    MatChipsModule,
+    MatTreeModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

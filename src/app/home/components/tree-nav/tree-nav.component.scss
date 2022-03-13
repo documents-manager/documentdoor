@@ -1,0 +1,32 @@
+.type-icon {
+  color: #757575;
+  margin-right: 5px;
+}
+
+.tree-root {
+  background: inherit;
+  font-size: 16px;
+}
+
+.tree-item {
+  height: 2.2em !important;
+  min-height: 1.5em !important;
+}
+
+.mat-tree-node {
+  font-size: 16px;
+  border-top-right-radius: 32px;
+  border-bottom-right-radius: 32px;
+}
+
+.mat-tree-node:hover {
+  background-color: whitesmoke;
+}
+
+.link:hover {
+  cursor: pointer;
+}
+
+.link {
+  padding: 15px 0;
+}

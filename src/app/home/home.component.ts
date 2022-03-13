@@ -7,6 +7,8 @@ import { autocompletions, searchTerm } from '../state/search/search.selectors';
 import { autocomplete, search } from '../state/search/search.actions';
 import { openLabelAddDialog } from '../state/actions/label.actions';
 import { openEpicAddDialog } from '../state/actions/epic.actions';
+import { NavigationService } from './services/navigation.service';
+import { TreeNode } from './models';
 import { openDocumentDialog } from '../state/actions/document.actions';
 
 @Component({
@@ -22,8 +24,15 @@ export class HomeComponent {
     shareReplay()
   );
   autocompletion$ = this.store.select(autocompletions);
+  data$: Observable<TreeNode[]>;
 
-  constructor(private readonly store: Store, private readonly breakpointObserver: BreakpointObserver) {}
+  constructor(
+    private readonly store: Store,
+    private readonly breakpointObserver: BreakpointObserver,
+    private navigationService: NavigationService
+  ) {
+    this.data$ = this.navigationService.data$;
+  }
 
   onSearchTermChanged(term: string) {
     this.store.dispatch(autocomplete({ term }));
