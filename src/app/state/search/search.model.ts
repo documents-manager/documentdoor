@@ -1,13 +1,13 @@
-import {DocumentLink, DocumentList} from '@state';
+import { DocumentLink, DocumentList, Epic, Label } from '@state';
 
-export interface SearchResult extends QueryResult<DocumentList> {
-}
+export interface SearchResult extends QueryResult<DocumentList> {}
 
-export interface AutocompleteResult extends QueryResult<DocumentLink> {
-}
+export interface AutocompleteResult extends QueryResult<DocumentLink> {}
 
 export interface QueryResult<T> {
-  documents?: SearchEntityResult<T>;
+  document?: SearchEntityResult<T>;
+  epic: SearchEntityResult<Epic>;
+  label: SearchEntityResult<Label>;
 }
 
 export interface SearchEntityResult<T> {
