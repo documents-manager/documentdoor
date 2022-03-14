@@ -5703,13 +5703,13 @@ ngx-quill@^16.1.1:
   dependencies:
     tslib "^2.3.0"
 
-ngx-skeleton-loader@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/ngx-skeleton-loader/-/ngx-skeleton-loader-4.0.0.tgz#2bd6ef369c2a1c3d053c09b2a099b403b373a662"
-  integrity sha512-fbCWZrBVJF1jVVK056z3zPcAk0EXUtImdRkrjbc4xiWNkmhGskGfNh6UxKrkheMS9iOJoaLLo8KscLeUa9yggQ==
+ngx-skeleton-loader@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/ngx-skeleton-loader/-/ngx-skeleton-loader-5.0.0.tgz#e0042de20b0159d3f97d03a696d68f39ceee383b"
+  integrity sha512-6cz8UAu4WcYnBp/LnU053LCIwjKNZWX8GX1v3bvqQVdDa1ubsEeJm+CZxk5B8W2jP9CcFhvWrBlmmVUyl1Yxug==
   dependencies:
     perf-marks "^1.13.4"
-    tslib "^1.10.0"
+    tslib "^2.0.0"
 
 nice-napi@^1.0.2:
   version "1.0.2"
@@ -7541,7 +7541,7 @@ tslib@2.3.1, tslib@^2.0.0, tslib@^2.1.0, tslib@^2.2.0, tslib@^2.3.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.3.1.tgz#e8a335add5ceae51aa261d32a490158ef042ef01"
   integrity sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==
 
-tslib@^1.10.0, tslib@^1.8.1, tslib@^1.9.0:
+tslib@^1.8.1, tslib@^1.9.0:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
