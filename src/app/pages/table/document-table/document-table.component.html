@@ -27,7 +27,7 @@
     <!-- lastupdated Column -->
     <ng-container matColumnDef="lastupdated">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Zuletzt geändert</th>
-      <td mat-cell *matCellDef="let row">{{row.lastupdated}}</td>
+      <td mat-cell *matCellDef="let row">{{row.lastupdated | date }}</td>
     </ng-container>
 
     <!-- created Column -->
