@@ -16,7 +16,7 @@ const routes: Routes = [
     redirectTo: 'dashboard'
   },
   { path: 'label', loadChildren: () => import('./pages/label/label.module').then(m => m.LabelModule) },
-  { path: 'table', loadChildren: () => import('./pages/table/table.module').then(m => m.TableModule) }
+  { path: 'search', loadChildren: () => import('./pages/search/search.module').then(m => m.SearchModule) }
 ];
 
 @NgModule({
