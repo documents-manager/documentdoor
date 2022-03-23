@@ -12,9 +12,11 @@ import { SearchEffects } from './search/search.effects';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { LabelEffects } from './effects/label.effects';
 import { EpicEffects } from './effects/epic.effects';
-import { CreationDialogsModule } from '../shared/creation-dialogs/creation-dialogs.module';
 import { DocumentEffects } from './effects/document.effects';
 import { PluralHttpUrlGenerator } from './http-url.generator';
+import { DocumentDialogModule } from '../shared/document-dialog/document-dialog.module';
+import { EpicDialogModule } from '../shared/epic-dialog/epic-dialog.module';
+import { LabelDialogModule } from '../shared/label-dialog/label-dialog.module';
 
 @NgModule({
   declarations: [],
@@ -30,7 +32,9 @@ import { PluralHttpUrlGenerator } from './http-url.generator';
       autoPause: true
     }),
     ReactiveComponentModule,
-    CreationDialogsModule
+    DocumentDialogModule,
+    EpicDialogModule,
+    LabelDialogModule
   ],
   providers: [
     { provide: DefaultDataServiceConfig, useValue: environment.serverConfig },

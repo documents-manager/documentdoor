@@ -1,3 +1,3 @@
-import { LabelDialogData } from '../../../shared/creation-dialogs/models/label-dialog';
+import { LabelDialogData } from '../../../shared/label-dialog/label-dialog';
 
 export { LabelDialogData };

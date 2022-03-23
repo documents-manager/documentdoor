@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { DocumentDialogData, DocumentDialogResult } from '../../models/document-dialog';
+import { DocumentDialogData, DocumentDialogResult } from './document-dialog';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { debounceTime, map, startWith } from 'rxjs/operators';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Epic, Label } from '@state';
-import { environment } from '../../../../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-document-dialog',
