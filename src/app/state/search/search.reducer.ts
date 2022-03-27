@@ -1,18 +1,23 @@
 import { createReducer, on } from '@ngrx/store';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { AutocompleteResult } from './search.model';
+import { AutocompleteResult, SortOrder } from './search.model';
 import * as SearchActions from './search.actions';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DocumentList } from '@state';
+import { DocumentTableItem } from '../../shared/document-table/document-table.component'
 
 export const searchesFeatureKey = 'search';
 
 export interface SearchState extends EntityState<DocumentList> {
   // additional entities state properties
   term: string;
+  selectedDocument: DocumentTableItem;
+  query: string;
   loading: boolean;
   error: HttpErrorResponse | undefined;
   autocomplete: AutocompleteResult | undefined;
+  page: {index: number, size: number};
+  sort: [{field: string, order: SortOrder}];
 }
 
 export const adapter: EntityAdapter<DocumentList> = createEntityAdapter<DocumentList>();
@@ -20,9 +25,20 @@ export const adapter: EntityAdapter<DocumentList> = createEntityAdapter<Document
 export const initialState: SearchState = adapter.getInitialState({
   // additional entity state properties
   term: '',
+  selectedDocument: {  
+    id: 0,
+    title: '',
+    epic: '',
+    label: '',
+    lastUpdated: '',
+    created: '',
+  },
+  query: '',
   loading: false,
   error: undefined,
-  autocomplete: undefined
+  autocomplete: undefined,
+  page: {index: 0, size: 15},
+  sort: [{field: '', order: SortOrder.ASC}],
 });
 
 export const searchReducer = createReducer(
@@ -31,8 +47,7 @@ export const searchReducer = createReducer(
     SearchActions.search,
     (state, action): SearchState => ({
       ...state,
-      term: action.request.query,
-      loading: true
+      page: {index: 0, size: state.page.size},
     })
   ),
   on(SearchActions.searchSuccess, (state, action) => ({
@@ -59,6 +74,25 @@ export const searchReducer = createReducer(
     ...state,
     error: action.error,
     loading: false
+  })),
+  on(SearchActions.selectDocument, (state, action) => ({
+    ...state,
+    selectedDocument: action.document,
+  })),
+  on(SearchActions.searchQuery, (state, action) => ({
+    ...state,
+    query: action.query,
+  })),
+  on(SearchActions.searchChangePage, (state, action) => ({
+    ...state,
+    page: {index: action.index, size: action.size},
+  })),
+  on(SearchActions.searchChangeSort, (state, action) => ({
+    ...state,
+    sort: [{
+      field: action.active, 
+      order: action.direction === 'asc' ? SortOrder.ASC : SortOrder.DESC,
+    }],
   }))
 );
 

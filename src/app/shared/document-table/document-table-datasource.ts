@@ -1,33 +1,33 @@
-import { DataSource } from '@angular/cdk/collections';
+import { DataSource, SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
-import { Observable, of as observableOf, merge } from 'rxjs';
+import { Observable, of as observableOf, merge, BehaviorSubject } from 'rxjs';
 
 // TODO: Replace this with your own data model type
 export interface DocumentTableItem {
-  id: number;
-  title: string;
-  epic: string;
+  id: number,
+  title: string,
+  epic: string,
   label: string,
-  lastupdated: string,
+  lastUpdated: string,
   created: string,
 }
 
 // TODO: replace this with real data from your application
 const EXAMPLE_DATA: DocumentTableItem[] = [
-  {id: 1, title: 'Rechnung Fahrrad', epic: 'Rechnung', label: 'Label', lastupdated: '05.01.2022', created: '05.01.2022'},
-  {id: 2, title: 'Rechnung Auto', epic: 'Rechnung', label: 'Label', lastupdated: '01.01.2022', created: '01.01.2022'},
-  {id: 3, title: 'Rechnung Haus', epic: 'Rechnung', label: 'Label', lastupdated: '01.01.2022', created: '01.01.2022'},
-  {id: 4, title: 'Rechnung Strom', epic: 'Rechnung', label: 'Label', lastupdated: '01.01.2022', created: '01.01.2022'},
-  {id: 5, title: 'Rechnung PC', epic: 'Rechnung', label: 'Label', lastupdated: '01.01.2022', created: '01.01.2022'},
-  {id: 6, title: 'Vorlesung Mathe', epic: 'Vorlesung', label: 'Label', lastupdated: '01.01.2022', created: '01.01.2022'},
-  {id: 7, title: 'Vorlesung Deutsch', epic: 'Vorlesung', label: 'Label', lastupdated: '01.01.2022', created: '01.01.2022'},
-  {id: 8, title: 'Vorlesung Englisch', epic: 'Vorlesung', label: 'Label', lastupdated: '01.01.2022', created: '01.01.2022'},
-  {id: 9, title: 'Vorlesung Spanisch', epic: 'Vorlesung', label: 'Label', lastupdated: '01.01.2022', created: '01.01.2022'},
-  {id: 10, title: 'Urkunde Bundesjugendspiele', epic: 'Urkunde', label: 'Label', lastupdated: '01.01.2022', created: '01.01.2022'},
-  {id: 11, title: 'Urkunde Kindergarten', epic: 'Urkunde', label: 'Label', lastupdated: '01.01.2022', created: '01.01.2022'},
-  {id: 12, title: 'Urkunde Feuerwehr', epic: 'Urkunde', label: 'Label', lastupdated: '01.01.2021', created: '01.01.2021'},
+  {id: 1, title: 'Rechnung Fahrrad', epic: 'Rechnung', label: 'Label', lastUpdated: '05.01.2022', created: '05.01.2022'},
+  {id: 2, title: 'Rechnung Auto', epic: 'Rechnung', label: 'Label', lastUpdated: '01.01.2022', created: '01.01.2022'},
+  {id: 3, title: 'Rechnung Haus', epic: 'Rechnung', label: 'Label', lastUpdated: '01.01.2022', created: '01.01.2022'},
+  {id: 4, title: 'Rechnung Strom', epic: 'Rechnung', label: 'Label', lastUpdated: '01.01.2022', created: '01.01.2022'},
+  {id: 5, title: 'Rechnung PC', epic: 'Rechnung', label: 'Label', lastUpdated: '01.01.2022', created: '01.01.2022'},
+  {id: 6, title: 'Vorlesung Mathe', epic: 'Vorlesung', label: 'Label', lastUpdated: '01.01.2022', created: '01.01.2022'},
+  {id: 7, title: 'Vorlesung Deutsch', epic: 'Vorlesung', label: 'Label', lastUpdated: '01.01.2022', created: '01.01.2022'},
+  {id: 8, title: 'Vorlesung Englisch', epic: 'Vorlesung', label: 'Label', lastUpdated: '01.01.2022', created: '01.01.2022'},
+  {id: 9, title: 'Vorlesung Spanisch', epic: 'Vorlesung', label: 'Label', lastUpdated: '01.01.2022', created: '01.01.2022'},
+  {id: 10, title: 'Urkunde Bundesjugendspiele', epic: 'Urkunde', label: 'Label', lastUpdated: '01.01.2022', created: '01.01.2022'},
+  {id: 11, title: 'Urkunde Kindergarten', epic: 'Urkunde', label: 'Label', lastUpdated: '01.01.2022', created: '01.01.2022'},
+  {id: 12, title: 'Urkunde Feuerwehr', epic: 'Urkunde', label: 'Label', lastUpdated: '01.01.2021', created: '01.01.2021'},
 ];
 
 /**
@@ -39,6 +39,9 @@ export class DocumentTableDataSource extends DataSource<DocumentTableItem> {
   data: DocumentTableItem[] = EXAMPLE_DATA;
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
+
+  private loadingSubject = new BehaviorSubject<boolean>(false);
+  public loading$ = this.loadingSubject.asObservable();
 
   constructor() {
     super();
@@ -66,7 +69,9 @@ export class DocumentTableDataSource extends DataSource<DocumentTableItem> {
    *  Called when the table is being destroyed. Use this function, to clean up
    * any open connections or free any held resources that were set up during connect.
    */
-  disconnect(): void {}
+  disconnect(): void {
+    this.loadingSubject.complete();
+  }
 
   /**
    * Paginate the data (client-side). If you're using server-side pagination,
@@ -97,7 +102,7 @@ export class DocumentTableDataSource extends DataSource<DocumentTableItem> {
         case 'title': return compare(a.title, b.title, isAsc);
         case 'epic': return compare(a.epic, b.epic, isAsc);
         case 'label': return compare(a.label, b.label, isAsc);
-        case 'lastupdated': return compare(a.lastupdated, b.lastupdated, isAsc);
+        case 'lastUpdated': return compare(a.lastUpdated, b.lastUpdated, isAsc);
         case 'created': return compare(a.created, b.created, isAsc);
         default: return 0;
       }
