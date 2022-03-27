@@ -3,8 +3,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { searchTerm } from '../state/search/search.selectors';
-import { search } from '../state/search/search.actions';
+import { autocompletions, searchTerm } from '../state/search/search.selectors';
+import { autocomplete, search } from '../state/search/search.actions';
 import { openLabelAddDialog } from '../state/actions/label.actions';
 import { openEpicAddDialog } from '../state/actions/epic.actions';
 import { NavigationService } from './services/navigation.service';
@@ -23,6 +23,7 @@ export class HomeComponent {
     map(result => result.matches),
     shareReplay()
   );
+  autocompletion$ = this.store.select(autocompletions);
   data$: Observable<TreeNode[]>;
 
   constructor(
@@ -33,7 +34,11 @@ export class HomeComponent {
     this.data$ = this.navigationService.data$;
   }
 
-  onSearchTermChanged(query: string) {
+  onSearchTermChanged(term: string) {
+    this.store.dispatch(autocomplete({ term }));
+  }
+
+  onSearchSubmit(query: string) {
     this.store.dispatch(
       search({
         request: {

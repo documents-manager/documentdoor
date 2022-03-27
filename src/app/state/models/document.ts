@@ -20,6 +20,7 @@ export interface DocumentList {
 export interface DocumentLink {
   id: number;
   title: string;
+  assets: Asset[];
 }
 
 export interface DocumentReference {

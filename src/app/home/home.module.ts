@@ -17,6 +17,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { TreeNavComponent } from './components/tree-nav/tree-nav.component';
 import { MatTreeModule } from '@angular/material/tree';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [HomeComponent, CreateEntityMenuComponent, SearchComponent, TreeNavComponent],
@@ -36,7 +38,9 @@ import { MatTreeModule } from '@angular/material/tree';
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatTreeModule
+    MatTreeModule,
+    OverlayModule,
+    MatChipsModule
   ]
 })
 export class HomeModule {}

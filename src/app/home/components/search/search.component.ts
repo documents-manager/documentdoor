@@ -1,7 +1,12 @@
-import { Component, Input, Output, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { merge, Observable } from 'rxjs';
+import { debounceTime, filter, mapTo } from 'rxjs/operators';
+import { FocusMonitor } from '@angular/cdk/a11y';
+import { MatInput } from '@angular/material/input';
+import { CdkConnectedOverlay } from '@angular/cdk/overlay';
+import { AutocompleteResult } from '../../../state/search/search.model';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-search',
@@ -9,11 +14,36 @@ import { debounceTime } from 'rxjs/operators';
   styleUrls: ['./search.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class SearchComponent {
+export class SearchComponent implements OnInit {
   @Input() term: string | undefined = '';
+  @Input() autocompletion!: AutocompleteResult | undefined;
   @Output() searchTermChanged: Observable<string>;
+  @Output() searchSubmit = new EventEmitter<string>();
+  showPanel$!: Observable<boolean>;
+  isPanelHidden$!: Observable<boolean>;
+  isPanelVisible$!: Observable<boolean>;
+  @ViewChild(MatInput, { read: ElementRef, static: true }) private inputEl!: ElementRef;
+  @ViewChild(CdkConnectedOverlay, { static: true }) private connectedOverlay!: CdkConnectedOverlay;
   searchFormControl = new FormControl();
-  constructor() {
-    this.searchTermChanged = this.searchFormControl.valueChanges.pipe(debounceTime(100));
+
+  constructor(private focusMonitor: FocusMonitor) {
+    this.searchTermChanged = this.searchFormControl.valueChanges.pipe(debounceTime(200));
+  }
+
+  ngOnInit(): void {
+    this.isPanelHidden$ = this.connectedOverlay.backdropClick.pipe(mapTo(false));
+    this.isPanelVisible$ = this.focusMonitor.monitor(this.inputEl).pipe(
+      filter(focused => !!focused),
+      mapTo(true)
+    );
+    this.showPanel$ = merge(this.isPanelHidden$, this.isPanelVisible$);
+  }
+
+  search() {
+    this.searchSubmit.emit(this.searchFormControl.value);
+  }
+
+  onAssetClicked(documentId: string | number, assetId: string | number) {
+    window.open(environment.serverConfig.root + '/documents/' + documentId + '/assets/' + assetId, 'blank');
   }
 }

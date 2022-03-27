@@ -15,6 +15,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { MatTreeModule } from '@angular/material/tree';
 import { HomeModule } from './home/home.module';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { A11yModule } from '@angular/cdk/a11y';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -44,6 +47,9 @@ import { MatIconModule } from '@angular/material/icon';
     ReactiveFormsModule,
     ReactiveComponentModule,
     ExtendedModule,
+    OverlayModule,
+    A11yModule,
+    MatChipsModule,
     MatTreeModule,
     MatButtonModule,
     MatIconModule
