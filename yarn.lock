@@ -1752,10 +1752,10 @@
   resolved "https://registry.yarnpkg.com/@jridgewell/resolve-uri/-/resolve-uri-3.0.5.tgz#68eb521368db76d040a6315cdb24bf2483037b9c"
   integrity sha512-VPeQ7+wH0itvQxnG+lIzWgkysKIr3L9sslimFW55rHMdGu/qCQ5z5h9zq4gI8uBtqkpHhsF4Z/OwExufUCThew==
 
-"@ngrx/component@^13.0.2":
-  version "13.0.2"
-  resolved "https://registry.yarnpkg.com/@ngrx/component/-/component-13.0.2.tgz#7555e126061f054a1654134cd5223b61e52130f2"
-  integrity sha512-Izq984Soqt/ze/XyNLTvFjdMkuGLwarfe0hT9qjVO8cHgI5hEAvjwklv+JHmM1dtJOZ+USoM0rgwaUU5iInQfA==
+"@ngrx/component@^13.1.0":
+  version "13.1.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/component/-/component-13.1.0.tgz#6f3005cc9e5012fb5c1afeb6efd521b2e71fda91"
+  integrity sha512-XFeFlGa2UoKzUh2TKJ/c0SL6sKnwCuN6KCyNfYERkvNuT2P1YjePi0O0/09lFUQmglXmc1Ywi5a0IoaXhUce0Q==
   dependencies:
     tslib "^2.0.0"
 
