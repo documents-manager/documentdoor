@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { AutocompleteResult, SearchResult } from './search.model';
+import { AutocompleteResult, Page, SearchResult, Sort } from './search.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DocumentTableItem } from '../../shared/document-table/document-table.component'
 
@@ -15,9 +15,9 @@ export const selectDocument = createAction('[Search/API] Select Document', props
 
 export const searchQuery = createAction('[Search/API] Search Query', props<{ query: string }>());
 
-export const searchChangePage = createAction('[Search/API] Change Page', props<{ index: number, size: number }>());
+export const searchChangePage = createAction('[Search/API] Change Page', props<Page>());
 
-export const searchChangeSort = createAction('[Search/API] Change Sort', props<{ active: string, direction: string }>());
+export const searchChangeSort = createAction('[Search/API] Change Sort', props<Sort>());
 
 
 // Autocomplete

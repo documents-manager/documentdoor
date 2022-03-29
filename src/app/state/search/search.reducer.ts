@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { AutocompleteResult, SortOrder } from './search.model';
+import { AutocompleteResult, Page, Sort, SortOrder } from './search.model';
 import * as SearchActions from './search.actions';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DocumentList } from '@state';
@@ -16,8 +16,8 @@ export interface SearchState extends EntityState<DocumentList> {
   loading: boolean;
   error: HttpErrorResponse | undefined;
   autocomplete: AutocompleteResult | undefined;
-  page: {index: number, size: number};
-  sort: [{field: string, order: SortOrder}];
+  page: Page;
+  sort: Sort[];
 }
 
 export const adapter: EntityAdapter<DocumentList> = createEntityAdapter<DocumentList>();
@@ -37,8 +37,8 @@ export const initialState: SearchState = adapter.getInitialState({
   loading: false,
   error: undefined,
   autocomplete: undefined,
-  page: {index: 0, size: 15},
-  sort: [{field: '', order: SortOrder.ASC}],
+  page: { index: 0, size: 15 },
+  sort: [],
 });
 
 export const searchReducer = createReducer(
@@ -77,7 +77,7 @@ export const searchReducer = createReducer(
   })),
   on(SearchActions.selectDocument, (state, action) => ({
     ...state,
-    selectedDocument: action.document,
+    selectedDocument: action.document === state.selectedDocument ? initialState.selectedDocument : action.document,
   })),
   on(SearchActions.searchQuery, (state, action) => ({
     ...state,
@@ -89,9 +89,9 @@ export const searchReducer = createReducer(
   })),
   on(SearchActions.searchChangeSort, (state, action) => ({
     ...state,
-    sort: [{
-      field: action.active, 
-      order: action.direction === 'asc' ? SortOrder.ASC : SortOrder.DESC,
+    sort: !action.field ? [] : [{
+      field: action.field, 
+      order: action.order,
     }],
   }))
 );

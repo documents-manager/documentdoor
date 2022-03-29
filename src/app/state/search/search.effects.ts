@@ -6,7 +6,6 @@ import { catchError, map, mergeMap, withLatestFrom } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { searchQuery, searchPage, searchSort } from './search.selectors';
-import { SortOrder } from './search.model';
 
 @Injectable()
 export class SearchEffects {

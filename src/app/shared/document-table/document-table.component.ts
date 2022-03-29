@@ -4,9 +4,9 @@ import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { DocumentTableDataSource } from './document-table-datasource';
 import { search, searchChangePage, selectDocument, searchChangeSort } from '../../state/search/search.actions';
-import { selectedDocument } from '../../state/search/search.selectors';
+import { selectedDocument, selectAllDocuments } from '../../state/search/search.selectors';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { SortOrder } from 'src/app/state/search/search.model';
 
 export interface DocumentTableItem {
   id: number,
@@ -27,8 +27,9 @@ export class DocumentTableComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<DocumentTableItem>;
   dataSource: DocumentTableDataSource;
-  selectedObs$: Observable<DocumentTableItem> = this.store.select(selectedDocument);
-  selected = {};
+
+  selectedDocument$ = this.store.select(selectedDocument);
+  allArticles$ = this.store.select(selectAllDocuments);
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['id', 'title', 'epic', 'label', 'lastUpdated', 'created'];
@@ -37,7 +38,6 @@ export class DocumentTableComponent implements AfterViewInit {
     private readonly store: Store,
   ) {
     this.dataSource = new DocumentTableDataSource();
-    this.selectedObs$.subscribe(document => this.selected = document)
   }
 
   ngAfterViewInit(): void {
@@ -48,6 +48,7 @@ export class DocumentTableComponent implements AfterViewInit {
 
   selectDocument(document: DocumentTableItem) {
     this.store.dispatch(selectDocument({document}));
+    this.allArticles$.subscribe(document => console.log(document));
   }
 
   changePage(pageEvent: PageEvent) {
@@ -57,7 +58,10 @@ export class DocumentTableComponent implements AfterViewInit {
 
   changeSort(event: {active: string, direction: string}) {
     console.log(event);
-    this.store.dispatch(searchChangeSort({active: event.active, direction: event.direction}));
+    this.store.dispatch(searchChangeSort({
+      field: !event.direction ? '' : event.active,
+      order: event.direction === 'asc' ? SortOrder.DESC : SortOrder.ASC,
+    }));
     this.store.dispatch(search());
   }
 }

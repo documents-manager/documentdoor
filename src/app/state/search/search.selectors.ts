@@ -1,5 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { SearchState } from './search.reducer';
+import { selectAll } from 'src/app/state/search/search.reducer';
 
 export const selectSearch = createFeatureSelector<SearchState>('search');
 
@@ -14,3 +15,4 @@ export const searchQuery = createSelector(selectSearch, searchState => searchSta
 export const searchPage = createSelector(selectSearch, searchState => searchState.page);
 export const searchSort = createSelector(selectSearch, searchState => searchState.sort);
 
+export const selectAllDocuments = createSelector(selectSearch, selectAll);

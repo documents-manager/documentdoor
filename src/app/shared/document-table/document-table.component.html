@@ -42,7 +42,7 @@
       mat-row 
       *matRowDef="let row; columns: displayedColumns;"
       (click)="selectDocument(row)"
-      [class.selected-row]="selected === row"
+      [class.selected-row]="(selectedDocument$ | async)?.id === row.id"
     ></tr>
   </table>
 
