@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { autocompletions, searchTerm } from '../state/search/search.selectors';
-import { autocomplete, search } from '../state/search/search.actions';
+import { autocomplete, search, searchQuery } from '../state/search/search.actions';
 import { openLabelAddDialog } from '../state/actions/label.actions';
 import { openEpicAddDialog } from '../state/actions/epic.actions';
 import { NavigationService } from './services/navigation.service';
@@ -17,7 +17,8 @@ import { openDocumentDialog } from '../state/actions/document.actions';
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomeComponent {
+
+export class HomeComponent {  
   term$: Observable<string> = this.store.select(searchTerm);
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(result => result.matches),
@@ -39,13 +40,8 @@ export class HomeComponent {
   }
 
   onSearchSubmit(query: string) {
-    this.store.dispatch(
-      search({
-        request: {
-          query
-        }
-      })
-    );
+    this.store.dispatch(searchQuery({query}));
+    this.store.dispatch(search());
   }
 
   addLabelClicked() {

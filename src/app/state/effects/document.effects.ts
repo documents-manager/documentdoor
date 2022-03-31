@@ -32,7 +32,6 @@ export class DocumentEffects {
 
               return dialogRef.afterClosed().pipe(
                 map(result => {
-                  console.log(this.documentService);
                   if (result?.ok && result.document) {
                     this.documentService.getAll();
                     this.documentService.add(result?.document);

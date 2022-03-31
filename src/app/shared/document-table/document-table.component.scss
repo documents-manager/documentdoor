@@ -1,3 +1,14 @@
 .full-width-table {
   width: 100%;
 }
+
+.selected-row {
+  background-color: lightgrey;
+}
+
+.mat-cell {
+  text-overflow: ellipsis; 
+  overflow: hidden; 
+  white-space: nowrap;
+  max-width: 5em;
+}

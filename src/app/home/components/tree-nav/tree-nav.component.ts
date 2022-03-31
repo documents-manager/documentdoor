@@ -36,8 +36,6 @@ export class TreeNavComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
         if (changes.data?.currentValue) {
-          console.log();
-
           this.updateDataSource(changes.data?.currentValue);
         }
     }

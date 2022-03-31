@@ -87,7 +87,6 @@ export class FileUploadComponent implements OnInit {
   }
 
   private addFormControl(asset: Asset) {
-    console.log(asset);
     const control = new FormControl(asset);
     this.files.push(control);
     this.files.updateValueAndValidity();
