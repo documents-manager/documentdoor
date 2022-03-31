@@ -1,5 +1,5 @@
 <div fxLayout="row" fxLayoutAlign="space-between center">
-  <div fxFlex fxLayout="row" fxLayoutGap="2rem">
+  <div [fxLayout]="flexDirection" fxFlex fxLayoutGap="2rem">
     <mat-form-field *ngIf="{ filteredDocuments: filteredDocuments$ | async } as val" appearance="fill">
       <mat-label>Dokument</mat-label>
 

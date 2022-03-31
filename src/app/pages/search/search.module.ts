@@ -6,9 +6,22 @@ import { SearchComponent } from './search.component';
 import { TableModule } from 'src/app/shared/document-table/document-table.module';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
+import { DocumentEditSideBarComponent } from './document-edit-side-bar/document-edit-side-bar.component';
+import { DocumentEditModule } from '../../shared/document-edit/document-edit.module';
+import { FlexModule } from '@angular/flex-layout';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
-  declarations: [SearchComponent],
-  imports: [CommonModule, SearchRoutingModule, TableModule, MatSidenavModule, MatButtonModule]
+  declarations: [SearchComponent, DocumentEditSideBarComponent],
+  imports: [
+    CommonModule,
+    SearchRoutingModule,
+    TableModule,
+    MatSidenavModule,
+    MatButtonModule,
+    DocumentEditModule,
+    FlexModule,
+    MatIconModule
+  ]
 })
 export class SearchModule {}

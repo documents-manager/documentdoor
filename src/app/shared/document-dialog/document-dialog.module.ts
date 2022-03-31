@@ -13,6 +13,7 @@ import { DocumentReferenceModule } from '../document-reference/document-referenc
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { DocumentEditModule } from '../document-edit/document-edit.module';
 
 const components = [DocumentDialogComponent];
 
@@ -31,7 +32,8 @@ const components = [DocumentDialogComponent];
     DocumentReferenceModule,
     MatButtonModule,
     MatInputModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    DocumentEditModule
   ],
   exports: components
 })

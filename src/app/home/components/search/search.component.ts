@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { merge, Observable } from 'rxjs';
-import { debounceTime, filter, mapTo } from 'rxjs/operators';
+import { debounceTime, filter, map } from 'rxjs/operators';
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { MatInput } from '@angular/material/input';
 import { CdkConnectedOverlay } from '@angular/cdk/overlay';
@@ -31,12 +31,13 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isPanelHidden$ = this.connectedOverlay.backdropClick.pipe(mapTo(false));
+    const searchStarted$ = this.searchSubmit.pipe(map(() => false));
+    this.isPanelHidden$ = this.connectedOverlay.backdropClick.pipe(map(() => false));
     this.isPanelVisible$ = this.focusMonitor.monitor(this.inputEl).pipe(
       filter(focused => !!focused),
-      mapTo(true)
+      map(() => true)
     );
-    this.showPanel$ = merge(this.isPanelHidden$, this.isPanelVisible$);
+    this.showPanel$ = merge(this.isPanelHidden$, this.isPanelVisible$, searchStarted$);
   }
 
   search() {

@@ -23,7 +23,7 @@
       </mat-nav-list>
       <app-tree-nav [data]="$any(data.treeData)"></app-tree-nav>
     </mat-sidenav>
-    <mat-sidenav-content>
+    <mat-sidenav-content fxLayout="column">
       <mat-toolbar class="primary-toolbar toolbar" color="primary" fxLayout="row" fxLayoutAlign=" center">
         <div fxFlex="nogrow">
           <button (click)="drawer.toggle()" *ngIf="data.isHandset" aria-label="Toggle sidenav" mat-icon-button type="button">
@@ -42,7 +42,7 @@
           ></app-search>
         </div>
       </mat-toolbar>
-      <div class="container">
+      <div class="container" fxFlex>
         <!-- Add Content Here -->
         <ng-content></ng-content>
       </div>
