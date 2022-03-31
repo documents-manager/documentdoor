@@ -5,7 +5,7 @@ export interface SearchResult extends QueryResult<DocumentList> {}
 export interface AutocompleteResult extends QueryResult<DocumentLink> {}
 
 export interface QueryResult<T> {
-  document?: SearchEntityResult<T>;
+  document: SearchEntityResult<T>;
   epic: SearchEntityResult<Epic>;
   label: SearchEntityResult<Label>;
 }

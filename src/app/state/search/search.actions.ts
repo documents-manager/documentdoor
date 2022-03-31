@@ -1,7 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { AutocompleteResult, Page, SearchResult, Sort } from './search.model';
 import { HttpErrorResponse } from '@angular/common/http';
-import { DocumentTableItem } from '../../shared/document-table/document-table.component'
 
 export const search = createAction('[Search/Page] Search Searchs');
 
@@ -9,7 +8,7 @@ export const searchSuccess = createAction('[Search/API] Search Success', props<{
 
 export const searchFailure = createAction('[Search/API] Search Failure', props<{ error: HttpErrorResponse }>());
 
-export const selectDocument = createAction('[Search/API] Select Document', props<{ document: DocumentTableItem }>());
+export const selectDocument = createAction('[Search/API] Select Document', props<{ documentId: number }>());
 
 // Search attributes
 

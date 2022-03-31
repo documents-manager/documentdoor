@@ -3,7 +3,6 @@ import { map, Observable } from 'rxjs';
 import {AutocompleteResult, SearchRequest, SearchResult} from './search.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { DocumentTableItem } from '../../shared/document-table/document-table-datasource'
 
 @Injectable({
   providedIn: 'root'

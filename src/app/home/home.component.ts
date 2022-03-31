@@ -17,7 +17,8 @@ import { openDocumentDialog } from '../state/actions/document.actions';
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomeComponent {
+
+export class HomeComponent {  
   term$: Observable<string> = this.store.select(searchTerm);
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(result => result.matches),

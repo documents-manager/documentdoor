@@ -12,22 +12,18 @@ export class SearchEffects {
   search$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(search),
-      withLatestFrom(
-        this.store.select(searchQuery),
-        this.store.select(searchPage),
-        this.store.select(searchSort),
-      ),
+      withLatestFrom(this.store.select(searchQuery), this.store.select(searchPage), this.store.select(searchSort)),
       mergeMap(([action, query, page, sort]) =>
-        this.searchService.search(
-          {
+        this.searchService
+          .search({
             query,
-            page,
-            sort,
-          }
-        ).pipe(
-          map(results => searchSuccess({ results })),
-          catchError(error => of(searchFailure({ error })))
-        )
+            page: { ...page, index: page.index + 1 },
+            sort
+          })
+          .pipe(
+            map(results => searchSuccess({ results })),
+            catchError(error => of(searchFailure({ error })))
+          )
       )
     );
   });
@@ -44,9 +40,5 @@ export class SearchEffects {
     )
   );
 
-  constructor(
-    private actions$: Actions, 
-    private searchService: SearchService,
-    private readonly store: Store,
-  ) {}
+  constructor(private actions$: Actions, private searchService: SearchService, private readonly store: Store) {}
 }
