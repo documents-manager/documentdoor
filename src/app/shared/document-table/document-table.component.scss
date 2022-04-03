@@ -12,3 +12,11 @@
   white-space: nowrap;
   max-width: 5em;
 }
+
+.no-search-hits {
+  display: flex;
+  justify-content: center;
+  .mat-card {
+    width: fit-content;
+  }
+}
