@@ -71,7 +71,7 @@ export const searchReducer = createReducer(
   })),
   on(SearchActions.selectDocument, (state, action) => ({
     ...state,
-    selectedDocumenId: action.documentId !== state.selectedDocumentId ? action.documentId : undefined
+    selectedDocumentId: action.documentId !== state.selectedDocumentId ? action.documentId : undefined
   })),
   on(SearchActions.searchQuery, (state, action) => ({
     ...state,
