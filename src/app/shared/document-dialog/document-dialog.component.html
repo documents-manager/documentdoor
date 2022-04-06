@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Dokument erstellen</h1>
+<div class="dialog-content" mat-dialog-content>
+  <app-document-edit #docEdit [epics]="data.epics" [labels]="data.labels"></app-document-edit>
+</div>
+<div mat-dialog-actions>
+  <button (click)="onNoClick()" mat-button>Abbrechen</button>
+  <button
+    (click)="onSaveClick()"
+    *ngIf="{ status: docEdit.form.statusChanges | async } as formState"
+    [disabled]="formState?.status ? formState?.status === 'INVALID' : docEdit.form.invalid"
+    mat-button
+  >
+    Speichern
+  </button>
+</div>

@@ -1,0 +1,21 @@
+<div fxLayout="column">
+  <div fxLayout fxLayoutAlign="space-between center">
+    <h2>Bearbeiten</h2>
+    <button (click)="onNoClick()" mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <app-document-edit #docEdit [document]="document" [epics]="[]" [labels]="[]" fxFlex></app-document-edit>
+  <div fxLayout fxLayoutAlign="end">
+    <button (click)="onNoClick()" mat-button>Abbrechen</button>
+    <button
+      (click)="onSaveClick()"
+      *ngIf="{ status: docEdit.form.statusChanges | async } as formState"
+      [disabled]="formState?.status ? formState?.status === 'INVALID' : docEdit.form.invalid"
+      color="primary"
+      mat-button
+    >
+      Speichern
+    </button>
+  </div>
+</div>

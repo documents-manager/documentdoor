@@ -1,24 +1,36 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { DocumentDialogData, DocumentDialogResult } from '../../models/document-dialog';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { debounceTime, map, startWith } from 'rxjs/operators';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
+import { FormArray, FormGroup } from '@angular/forms';
+import { Document, Epic, Label } from '@state';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { Observable } from 'rxjs';
+import { environment } from '../../../../environments/environment';
+import { debounceTime, map, startWith } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { Epic, Label } from '@state';
-import { environment } from '../../../../../environments/environment';
+import { FormFactoryService } from '../../../state/services/form-factory.service';
 
 @Component({
-  selector: 'app-document-dialog',
-  templateUrl: './document-dialog.component.html',
-  styleUrls: ['./document-dialog.component.scss'],
+  selector: 'app-document-edit',
+  templateUrl: './document-edit.component.html',
+  styleUrls: ['./document-edit.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DocumentDialogComponent implements OnInit {
-  form: FormGroup;
-  references: FormArray;
-  files: FormArray;
+export class DocumentEditComponent implements OnInit, OnChanges {
+  @Input() epics!: Epic[];
+  @Input() labels!: Label[];
+  @Input() document: Document | null = null;
+  form!: FormGroup;
+  references!: FormArray;
+  assets!: FormArray;
   selectedLabels: Label[] = [];
   selectedEpic: Epic | undefined = undefined;
   separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -27,29 +39,20 @@ export class DocumentDialogComponent implements OnInit {
 
   deleteUri = environment.serverConfig.root + '/staging';
   uploadUri = environment.serverConfig.root + '/staging';
+  getUri: string | undefined = undefined;
 
   @ViewChild('epicInput') epicInput!: ElementRef<HTMLInputElement>;
   @ViewChild('labelInput') labelInput!: ElementRef<HTMLInputElement>;
 
-  constructor(
-    public dialogRef: MatDialogRef<DocumentDialogComponent, DocumentDialogResult>,
-    @Inject(MAT_DIALOG_DATA) public data: DocumentDialogData,
-    private fb: FormBuilder,
-    private changeDetector: ChangeDetectorRef
-  ) {
-    this.references = this.fb.array([]);
-    this.files = this.fb.array([], Validators.required);
-    this.form = this.fb.group({
-      title: ['', [Validators.required]],
-      description: [''],
-      label: [null],
-      epic: [null],
-      references: this.references,
-      files: this.files
-    });
-  }
+  constructor(private formFactory: FormFactoryService, private changeDetector: ChangeDetectorRef) {}
 
   ngOnInit(): void {
+    this.initForm();
+
+    if (this.document) {
+      this.getUri = environment.serverConfig.root + '/documents/' + this.document?.id + '/assets/';
+    }
+
     this.filteredEpics$ = this.form.get('epic')!.valueChanges.pipe(
       startWith(null),
       map(value => this._filterEpics(typeof value === 'string' ? value : value?.name))
@@ -62,21 +65,16 @@ export class DocumentDialogComponent implements OnInit {
     this.changeDetector.detectChanges();
   }
 
-  onNoClick() {
-    this.dialogRef.close();
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes?.document) {
+      this.ngOnInit();
+    }
   }
 
-  onSaveClick() {
-    const document = this.createDocumentDto();
-    this.dialogRef.close({
-      ok: true,
-      document
-    });
-  }
-
-  private createDocumentDto() {
+  createDocumentDto() {
     const { label, ...rest } = this.form.value;
     return {
+      ...this.document,
       ...rest,
       epic: this.selectedEpic,
       labels: this.selectedLabels
@@ -128,7 +126,7 @@ export class DocumentDialogComponent implements OnInit {
 
   private _filterEpics(value: string): Epic[] {
     if (!value) {
-      return this.data.epics;
+      return this.epics;
     }
     const filterValue = value.toLowerCase();
 
@@ -137,28 +135,36 @@ export class DocumentDialogComponent implements OnInit {
       this.setEpic(value);
     }
 
-    return this.data.epics.filter(epic => this._epicMatches(epic, filterValue));
+    return this.epics.filter(epic => this._epicMatches(epic, filterValue));
   }
 
   private _filterLabels(value: string | null): Label[] {
     const filterValue = value?.toLowerCase() ?? '';
 
-    return this.data.labels.filter(label => this._labelMatches(label, filterValue));
+    return this.labels.filter(label => this._labelMatches(label, filterValue));
   }
 
   private _labelMatches(label: Label, filterValue: string): boolean {
-    return !this.selectedLabels.map(label => label.name).includes(label.name) && label.name.toLowerCase().includes(filterValue);
+    return !this.selectedLabels.map(l => l.name).includes(label.name) && label.name.toLowerCase().includes(filterValue);
   }
 
   private _findEpic(name: string): Epic | undefined {
-    return this.data.epics.find(epic => epic.name === name);
+    return this.epics.find(epic => epic.name === name);
   }
 
   private _findLabel(name: string): Label | undefined {
-    return this.data.labels.find(label => label.name === name);
+    return this.labels.find(label => label.name === name);
   }
 
   private _epicMatches(epic: Epic, filterValue: string) {
     return epic.name.includes(filterValue);
+  }
+
+  private initForm() {
+    this.form = this.formFactory.buildDocumentForm(this.document);
+    this.references = this.form.get('references') as FormArray;
+    this.assets = this.form.get('assets') as FormArray;
+    this.selectedEpic = this.document?.epic ?? undefined;
+    this.selectedLabels = this.document?.labels ?? [];
   }
 }

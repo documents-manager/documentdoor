@@ -1,1 +1,14 @@
-<app-document-table></app-document-table>
+<mat-drawer-container *ngIf="{ document: selectedDocument$ | async, id: selectedDocumentId$ | async } as selected">
+  <mat-drawer (closed)="onClosed()" [opened]="!!selected.id" mode="side" position="end">
+    <app-document-edit-side-bar
+      (closed)="onClosed()"
+      (save)="onSave($event)"
+      *ngIf="selected.document"
+      [document]="selected.document"
+    ></app-document-edit-side-bar>
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <app-document-table></app-document-table>
+  </mat-drawer-content>
+</mat-drawer-container>

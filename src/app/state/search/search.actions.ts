@@ -8,7 +8,9 @@ export const searchSuccess = createAction('[Search/API] Search Success', props<{
 
 export const searchFailure = createAction('[Search/API] Search Failure', props<{ error: HttpErrorResponse }>());
 
-export const selectDocument = createAction('[Search/API] Select Document', props<{ documentId: number }>());
+export const selectDocument = createAction('[Search/Page] Select Document', props<{ documentId: number }>());
+
+export const resetSelection = createAction('[Search/Page] Reset Selection');
 
 // Search attributes
 
@@ -17,7 +19,6 @@ export const searchQuery = createAction('[Search/API] Search Query', props<{ que
 export const searchChangePage = createAction('[Search/API] Change Page', props<Page>());
 
 export const searchChangeSort = createAction('[Search/API] Change Sort', props<Sort>());
-
 
 // Autocomplete
 
