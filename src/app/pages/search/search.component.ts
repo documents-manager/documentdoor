@@ -31,7 +31,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.route.queryParams.pipe(takeUntil(this.destroy$)).subscribe(queryParams => {
       this.store.dispatch(searchQuery({query: decodeURI(queryParams.query)}));
       this.store.dispatch(search());
-      this.store.dispatch(selectDocument({documentId: +queryParams['document']}));
+      this.store.dispatch(selectDocument({documentId: +queryParams['documentId']}));
     })
   }
 
