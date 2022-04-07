@@ -13,14 +13,14 @@ export interface DocumentList {
   description: string;
   created: string;
   lastUpdated: string;
-  epic: Epic;
+  epic: Epic | null;
   labels: Label[];
 }
 
 export interface DocumentLink {
   id: number;
   title: string;
-  assets: Asset[];
+  assets?: Asset[];
 }
 
 export interface DocumentReference {

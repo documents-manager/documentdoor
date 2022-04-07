@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { finalize } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
@@ -10,11 +10,12 @@ import { Asset } from '@state';
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.scss']
 })
-export class FileUploadComponent implements OnInit {
+export class FileUploadComponent implements OnInit, OnChanges {
   @Input() requiredFileType: string | undefined;
   @Input() uploadUri: string = '';
   @Input() deleteUri: string = '';
-  @Input() files!: FormArray;
+  @Input() getUri: string | undefined = undefined;
+  @Input() assets!: FormArray;
   uploadProgress: Map<string, number | undefined> = new Map<string, number | undefined>();
   uploadSub: Map<string, Subscription | undefined> = new Map<string, Subscription | undefined>([]);
 
@@ -53,9 +54,13 @@ export class FileUploadComponent implements OnInit {
   }
 
   deleteFile(file: string) {
-    const fileId = this.files.controls.find(control => control.value?.fileName === file);
+    const fileId = this.findAssetId(file);
 
     this.http.delete(this.deleteUri + '/' + fileId).subscribe();
+  }
+
+  findAssetId(file: string) {
+    return this.assets.controls.find(control => control.value?.fileName === file)?.value?.id;
   }
 
   cancelUpload(file: string, removeFromBackend: boolean) {
@@ -71,15 +76,28 @@ export class FileUploadComponent implements OnInit {
   reset(name: string) {
     this.uploadProgress.delete(name);
     this.uploadSub.delete(name);
-    const controlIndex = this.files.controls.findIndex(control => control.value?.fileName === name);
+    const controlIndex = this.assets.controls.findIndex(control => control.value?.fileName === name);
 
     if (controlIndex !== -1) {
-      this.files.removeAt(controlIndex);
+      this.assets.removeAt(controlIndex);
     }
     this.changeDetectorRef.detectChanges();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    for (const control of this.assets.controls) {
+      const asset: Asset = control.value;
+      this.finalizeUpload(asset.fileName);
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.assets) {
+      this.uploadProgress = new Map<string, number | undefined>();
+      this.uploadSub = new Map<string, Subscription | undefined>();
+      this.ngOnInit();
+    }
+  }
 
   finalizeUpload(name: string) {
     this.uploadProgress.set(name, 100);
@@ -88,8 +106,8 @@ export class FileUploadComponent implements OnInit {
 
   private addFormControl(asset: Asset) {
     const control = new FormControl(asset);
-    this.files.push(control);
-    this.files.updateValueAndValidity();
+    this.assets.push(control);
+    this.assets.updateValueAndValidity();
     this.changeDetectorRef.detectChanges();
   }
 }

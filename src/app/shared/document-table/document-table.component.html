@@ -1,11 +1,23 @@
-<div class="mat-elevation-z8">
+<!-- <div class="spinner-container" *ngIf="(isLoading$ | async)">
+  <mat-spinner></mat-spinner>
+</div> -->
 
-  <!-- <div class="spinner-container" *ngIf="(isLoading$ | async)">
-    <mat-spinner></mat-spinner>
-  </div> -->
+<div class="no-search-hits" *ngIf="((allArticles$ | async) ?? []).length === 0">
+  <mat-card>
+    <mat-card-title>Keine Dokumente gefunden.</mat-card-title>
+  </mat-card>
+</div>
 
-  <table mat-table [dataSource]="(allArticles$ | async) ?? []" class="full-width-table" matSort aria-label="Elements" (matSortChange)="changeSort($event)">
+<div class="mat-elevation-z8" *ngIf="((allArticles$ | async) ?? []).length > 0">
 
+  <table
+    mat-table
+    [dataSource]="(allArticles$ | async) ?? []"
+    class="full-width-table"
+    matSort
+    aria-label="Elements"
+    (matSortChange)="changeSort($event)"
+  >
     <!-- id Column -->
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
@@ -28,9 +40,9 @@
     <ng-container matColumnDef="label">
       <th mat-header-cell *matHeaderCellDef>Label</th>
       <td mat-cell *matCellDef="let row" class="truncate-text">
-          <ng-container *ngFor="let label of row.labels">
-            {{label?.name}}
-          </ng-container>
+        <ng-container *ngFor="let label of row.labels">
+          {{label?.name}}
+        </ng-container>
       </td>
     </ng-container>
 
@@ -52,7 +64,8 @@
       *matRowDef="let row; columns: displayedColumns;"
       (click)="selectDocument(row.id)"
       [class.selected-row]="(selectedDocumentId$ | async) === row.id"
-    ></tr>
+    >
+    </tr>
   </table>
 
   <mat-paginator 

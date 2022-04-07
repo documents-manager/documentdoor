@@ -3,9 +3,8 @@ import { EpicService } from '../../state/services/epic.service';
 import { Observable } from 'rxjs';
 import { Epic } from '@state';
 import { MatDialog } from '@angular/material/dialog';
-import { EpicDialogComponent } from '../../shared/creation-dialogs/components/epic-dialog/epic-dialog.component';
-import { EpicDialogData } from '../../shared/creation-dialogs/models';
-import { EpicDialogResult } from '../../shared/creation-dialogs/models/epic-dialog';
+import { EpicDialogComponent } from '../../shared/epic-dialog/epic-dialog.component';
+import { EpicDialogData, EpicDialogResult } from '../../shared/epic-dialog/epic-dialog';
 import { DocumentService } from '../../state/services/document.service';
 
 @Component({

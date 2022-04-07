@@ -7,6 +7,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';  
 import { DocumentTableComponent } from './document-table.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
     MatPaginatorModule,
     MatSortModule,
     MatFormFieldModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatCardModule
   ],
   exports: [DocumentTableComponent]
 })

@@ -3,9 +3,9 @@ import { Observable } from 'rxjs';
 import { Label } from '@state';
 import { LabelService } from '../../state/services/label.service';
 import { MatDialog } from '@angular/material/dialog';
-import { LabelDialogComponent } from '../../shared/creation-dialogs/components/label-dialog/label-dialog.component';
+import { LabelDialogComponent } from '../../shared/label-dialog/label-dialog.component';
 import { LabelDialogData } from './models';
-import { LabelDialogResult } from '../../shared/creation-dialogs/models/label-dialog';
+import { LabelDialogResult } from '../../shared/label-dialog/label-dialog';
 
 @Component({
   selector: 'app-label',

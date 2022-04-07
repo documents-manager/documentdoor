@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { AutocompleteResult, Page, Sort, SortOrder } from './search.model';
+import { AutocompleteResult, Page, Sort } from './search.model';
 import * as SearchActions from './search.actions';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DocumentList } from '@state';
@@ -70,6 +70,10 @@ export const searchReducer = createReducer(
   on(SearchActions.selectDocument, (state, action) => ({
     ...state,
     selectedDocumentId: action.documentId !== state.selectedDocumentId ? action.documentId : undefined
+  })),
+  on(SearchActions.resetSelection, state => ({
+    ...state,
+    selectedDocumentId: undefined
   })),
   on(SearchActions.searchQuery, (state, action) => ({
     ...state,

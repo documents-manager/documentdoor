@@ -19,8 +19,9 @@ export class DocumentReferenceComponent implements OnInit {
   documentTitleControl = new FormControl();
   types = DocumentReferenceType;
   filteredDocuments$!: Observable<DocumentLink[]>;
+  flexDirection!: 'row' | 'column';
 
-  constructor(private searchService: SearchService) {}
+  constructor(private searchService: SearchService, private hostElement: ElementRef) {}
 
   ngOnInit(): void {
     this.filteredDocuments$ = this.documentTitleControl!.valueChanges.pipe(
@@ -33,6 +34,7 @@ export class DocumentReferenceComponent implements OnInit {
         return this.searchService.autocomplete(query).pipe(map(autocomplete => autocomplete.document?.hits ?? []));
       })
     );
+    this.flexDirection = this.hostElement.nativeElement.offsetWidth >= 300 ? 'column' : 'row';
   }
 
   remove() {
@@ -51,11 +53,11 @@ export class DocumentReferenceComponent implements OnInit {
   }
 
   selectDocument(event: MatAutocompleteSelectedEvent, filteredDocuments: DocumentLink[]) {
-    const selectedDocument = this._findDocument(event.option.viewValue, filteredDocuments);
+    const { assets, ...documentLink } = this._findDocument(event.option.viewValue, filteredDocuments) ?? {};
     this.epicInput.nativeElement.value = '';
     this.documentTitleControl.setValue(null);
     this.documentTitleControl.disable();
-    this.control.get('targetDocument')!.setValue(selectedDocument);
+    this.control.get('targetDocument')!.setValue(documentLink);
   }
 
   private _findDocument(title: string, filteredDocuments: DocumentLink[]): DocumentLink | undefined {
