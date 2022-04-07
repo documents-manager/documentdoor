@@ -34,7 +34,7 @@
         <div mat-subheader>Documents</div>
         <a
           *ngFor="let document of autocompletion?.document?.hits"
-          [queryParams]="{ document: document.id }"
+          [queryParams]="{ document: document.id, query: document.title}"
           [routerLink]="['/', 'search']"
           mat-list-item
         >

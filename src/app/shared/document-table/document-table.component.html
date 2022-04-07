@@ -20,7 +20,7 @@
   >
     <!-- id Column -->
     <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+      <th mat-header-cell *matHeaderCellDef>Id</th>
       <td mat-cell *matCellDef="let row">{{row.id}}</td>
     </ng-container>
 
@@ -33,7 +33,7 @@
     <!-- epic Column -->
     <ng-container matColumnDef="epic">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Epic</th>
-      <td mat-cell *matCellDef="let row">{{row.epic.name}}</td>
+      <td mat-cell *matCellDef="let row">{{row.epic?.name}}</td>
     </ng-container>
 
     <!-- Label Column -->

@@ -3,13 +3,14 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { autocompletions, searchTerm } from '../state/search/search.selectors';
-import { autocomplete, search, searchQuery } from '../state/search/search.actions';
+import { autocompletions, searchQuery } from '../state/search/search.selectors';
+import { autocomplete } from '../state/search/search.actions';
 import { openLabelAddDialog } from '../state/actions/label.actions';
 import { openEpicAddDialog } from '../state/actions/epic.actions';
 import { NavigationService } from './services/navigation.service';
 import { TreeNode } from './models';
 import { openDocumentDialog } from '../state/actions/document.actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,7 @@ import { openDocumentDialog } from '../state/actions/document.actions';
 })
 
 export class HomeComponent {  
-  term$: Observable<string> = this.store.select(searchTerm);
+  term$: Observable<string> = this.store.select(searchQuery);
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(result => result.matches),
     shareReplay()
@@ -30,7 +31,8 @@ export class HomeComponent {
   constructor(
     private readonly store: Store,
     private readonly breakpointObserver: BreakpointObserver,
-    private navigationService: NavigationService
+    private navigationService: NavigationService,
+    private router: Router
   ) {
     this.data$ = this.navigationService.data$;
   }
@@ -40,8 +42,11 @@ export class HomeComponent {
   }
 
   onSearchSubmit(query: string) {
-    this.store.dispatch(searchQuery({query}));
-    this.store.dispatch(search());
+    this.router.navigate(['/', 'search'], {
+      queryParams: {
+        query
+      }
+    })
   }
 
   addLabelClicked() {
