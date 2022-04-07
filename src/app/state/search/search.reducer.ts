@@ -9,7 +9,6 @@ export const searchesFeatureKey = 'search';
 
 export interface SearchState extends EntityState<DocumentList> {
   // additional entities state properties
-  term: string;
   selectedDocumentId: number | undefined;
   query: string;
   loading: boolean;
@@ -24,7 +23,6 @@ export const adapter: EntityAdapter<DocumentList> = createEntityAdapter<Document
 
 export const initialState: SearchState = adapter.getInitialState({
   // additional entity state properties
-  term: '',
   selectedDocumentId: undefined,
   query: '',
   loading: false,
