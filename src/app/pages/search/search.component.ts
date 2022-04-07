@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subject, takeUntil } from 'rxjs';
-import { search, searchQuery } from 'src/app/state/search/search.actions';
+import { search, searchQuery, selectDocument } from 'src/app/state/search/search.actions';
 import { Document } from '@state';
 import { selectedDocumentId } from '../../state/search/search.selectors';
 import { DocumentService } from '../../state/services/document.service';
@@ -31,6 +31,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.route.queryParams.pipe(takeUntil(this.destroy$)).subscribe(queryParams => {
       this.store.dispatch(searchQuery({query: decodeURI(queryParams.query)}));
       this.store.dispatch(search());
+      this.store.dispatch(selectDocument({documentId: +queryParams['document']}));
     })
   }
 
