@@ -37,6 +37,7 @@
           [queryParams]="{ document: document.id, query: document.title}"
           [routerLink]="['/', 'search']"
           mat-list-item
+          (click)="onDocumentClicked(document.id)"
         >
           <mat-icon mat-list-icon>article</mat-icon>
           <div mat-line>

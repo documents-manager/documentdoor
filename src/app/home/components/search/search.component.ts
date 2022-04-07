@@ -7,6 +7,8 @@ import { MatInput } from '@angular/material/input';
 import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { AutocompleteResult } from '../../../state/search/search.model';
 import { environment } from '../../../../environments/environment';
+import { selectDocument } from 'src/app/state/search/search.actions';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-search',
@@ -26,7 +28,10 @@ export class SearchComponent implements OnInit {
   @ViewChild(CdkConnectedOverlay, { static: true }) private connectedOverlay!: CdkConnectedOverlay;
   searchFormControl = new FormControl();
 
-  constructor(private focusMonitor: FocusMonitor) {
+  constructor(
+    private focusMonitor: FocusMonitor,
+    private readonly store: Store,
+  ) {
     this.searchTermChanged = this.searchFormControl.valueChanges.pipe(debounceTime(200));
   }
 
@@ -42,6 +47,10 @@ export class SearchComponent implements OnInit {
 
   search() {
     this.searchSubmit.emit(this.searchFormControl.value);
+  }
+
+  onDocumentClicked(documentId: number) {
+    this.store.dispatch(selectDocument({documentId}));
   }
 
   onAssetClicked(documentId: string | number, assetId: string | number) {
