@@ -7,7 +7,7 @@ import { MatInput } from '@angular/material/input';
 import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { AutocompleteResult } from '../../../state/search/search.model';
 import { environment } from '../../../../environments/environment';
-import { resetSelection, selectDocument } from 'src/app/state/search/search.actions';
+import { selectDocument } from 'src/app/state/search/search.actions';
 import { Store } from '@ngrx/store';
 
 @Component({
@@ -46,7 +46,6 @@ export class SearchComponent implements OnInit {
   }
 
   search() {
-    this.store.dispatch(resetSelection());
     this.searchSubmit.emit(this.searchFormControl.value);
   }
 
