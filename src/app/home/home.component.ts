@@ -10,6 +10,7 @@ import { openEpicAddDialog } from '../state/actions/epic.actions';
 import { NavigationService } from './services/navigation.service';
 import { TreeNode } from './models';
 import { openDocumentDialog } from '../state/actions/document.actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -30,7 +31,8 @@ export class HomeComponent {
   constructor(
     private readonly store: Store,
     private readonly breakpointObserver: BreakpointObserver,
-    private navigationService: NavigationService
+    private navigationService: NavigationService,
+    private router: Router
   ) {
     this.data$ = this.navigationService.data$;
   }
@@ -40,8 +42,11 @@ export class HomeComponent {
   }
 
   onSearchSubmit(query: string) {
-    this.store.dispatch(searchQuery({query}));
-    this.store.dispatch(search());
+    this.router.navigate(['/', 'search'], {
+      queryParams: {
+        query
+      }
+    })
   }
 
   addLabelClicked() {
