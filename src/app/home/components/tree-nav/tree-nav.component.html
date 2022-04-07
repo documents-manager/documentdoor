@@ -3,7 +3,9 @@
     *matTreeNodeDef="let node" 
     matTreeNodePadding="0,6" 
     matTreeNodePaddingIndent="16" 
-    class="tree-item" (click)="clickedNode(node)" 
+    class="tree-item"
+    style="cursor: pointer;"
+    [queryParams]="{ query: node.name}"
     [routerLink]="['/', 'search']"
   >
     <button mat-icon-button disabled></button>

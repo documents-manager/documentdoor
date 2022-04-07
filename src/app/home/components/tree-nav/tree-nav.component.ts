@@ -2,8 +2,6 @@ import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import {FlatTreeNode, TreeNode} from "../../models";
-import { Store } from '@ngrx/store';
-import { search, searchQuery } from 'src/app/state/search/search.actions';
 
 @Component({
   selector: 'app-tree-nav',
@@ -25,7 +23,7 @@ export class TreeNavComponent implements OnChanges {
     Labels: false,
     Epics: false
   }
-  constructor(private readonly store: Store,) {
+  constructor() {
     this.treeFlattener = new MatTreeFlattener(
         this.transformer,
         this.getLevel,
@@ -113,12 +111,5 @@ export class TreeNavComponent implements OnChanges {
 
   private isActive(node: FlatTreeNode) {
     return this.expandedState[node.name] ?? false;
-  }
-
-  clickedNode(node: FlatTreeNode) {
-    if (!node.expandable) {
-      this.store.dispatch(searchQuery({query: node.name}))
-      this.store.dispatch(search());
-    }
   }
 }
