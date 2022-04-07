@@ -19,7 +19,6 @@ export class DocumentReferenceComponent implements OnInit {
   documentTitleControl = new FormControl();
   types = DocumentReferenceType;
   filteredDocuments$!: Observable<DocumentLink[]>;
-  flexDirection!: 'row' | 'column';
 
   constructor(private searchService: SearchService, private hostElement: ElementRef) {}
 
@@ -34,7 +33,6 @@ export class DocumentReferenceComponent implements OnInit {
         return this.searchService.autocomplete(query).pipe(map(autocomplete => autocomplete.document?.hits ?? []));
       })
     );
-    this.flexDirection = this.hostElement.nativeElement.offsetWidth >= 300 ? 'column' : 'row';
   }
 
   remove() {
