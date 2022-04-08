@@ -10,6 +10,7 @@ import { DocumentEditSideBarComponent } from './document-edit-side-bar/document-
 import { DocumentEditModule } from '../../shared/document-edit/document-edit.module';
 import { FlexModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
+import { SharedPipesModule } from '../../shared/shared-pipes/shared-pipes.module';
 
 @NgModule({
   declarations: [SearchComponent, DocumentEditSideBarComponent],
@@ -21,7 +22,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     DocumentEditModule,
     FlexModule,
-    MatIconModule
+    MatIconModule,
+    SharedPipesModule
   ]
 })
 export class SearchModule {}

@@ -5,7 +5,13 @@
       <mat-icon>close</mat-icon>
     </button>
   </div>
-  <app-document-edit #docEdit [document]="document" [epics]="[]" [labels]="[]" fxFlex></app-document-edit>
+  <app-document-edit
+    #docEdit
+    [document]="document | cloneDeep"
+    [epics]="(epics$ | async) ?? []"
+    [labels]="(labels$ | async) ?? []"
+    fxFlex
+  ></app-document-edit>
   <div fxLayout fxLayoutAlign="end">
     <button (click)="onNoClick()" mat-button>Abbrechen</button>
     <button
