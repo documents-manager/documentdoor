@@ -87,7 +87,9 @@ export class DocumentEditComponent implements OnInit, OnChanges {
   }
 
   removeEpic(): void {
-    this.epicInput.nativeElement.value = '';
+    if (this.epicInput?.nativeElement) {
+      this.epicInput.nativeElement.value = '';
+    }
     this.form.get('epic')!.reset();
     this.form.get('epic')!.enable();
     this.selectedEpic = undefined;
