@@ -36,6 +36,7 @@
           *ngFor="let document of autocompletion?.document?.hits"
           [queryParams]="{ documentId: document.id, query: document.title}"
           [routerLink]="['/', 'search']"
+          (click)="onDocumentClicked()"
           mat-list-item
         >
           <mat-icon mat-list-icon>article</mat-icon>
