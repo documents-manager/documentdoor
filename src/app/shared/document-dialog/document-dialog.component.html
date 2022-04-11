@@ -2,7 +2,7 @@
 <div class="dialog-content" mat-dialog-content>
   <app-document-edit #docEdit [epics]="data.epics" [labels]="data.labels"></app-document-edit>
 </div>
-<div mat-dialog-actions>
+<div mat-dialog-actions fxLayoutAlign="end">
   <button (click)="onNoClick()" mat-button>Abbrechen</button>
   <button
     (click)="onSaveClick()"
