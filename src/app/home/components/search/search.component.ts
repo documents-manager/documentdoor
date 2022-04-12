@@ -49,7 +49,7 @@ export class SearchComponent implements OnInit {
   }
 
   onAssetClicked(documentId: string | number, assetId: string | number) {
-    window.open(environment.serverConfig.root + '/documents/' + documentId + '/assets/' + assetId, 'blank');
+    window.open(environment.serverConfig.root + '/documents/' + documentId + '/assets/' + assetId, '_blank');
   }
   
   onDocumentClicked() {

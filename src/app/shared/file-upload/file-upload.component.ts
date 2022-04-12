@@ -26,7 +26,7 @@ export class FileUploadComponent implements OnInit, OnChanges {
       if (file) {
         const formData = new FormData();
         formData.append('filename', file.name);
-        formData.append('mimetype', 'text/plain');
+        formData.append('mimetype', file.type);
         formData.append('file', file);
 
         const upload$ = this.http
