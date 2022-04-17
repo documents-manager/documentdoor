@@ -36,7 +36,7 @@
           *ngFor="let document of autocompletion?.document?.hits"
           [queryParams]="{ documentId: document.id, query: document.title}"
           [routerLink]="['/', 'search']"
-          (click)="onDocumentClicked()"
+          (click)="onSuggestionClicked()"
           mat-list-item
         >
           <mat-icon mat-list-icon>article</mat-icon>
@@ -66,10 +66,11 @@
           <mat-chip-list>
             <mat-chip
               *ngFor="let epic of autocompletion?.epic?.hits"
-              [queryParams]="{ epic: epic.id }"
+              [queryParams]="{ query: epic.name }"
               [routerLink]="['/', 'search']"
               color="primary"
               selected
+              (click)="onSuggestionClicked()"
               >{{ epic.name }}</mat-chip
             >
           </mat-chip-list>
@@ -83,10 +84,11 @@
           <mat-chip-list>
             <mat-chip
               *ngFor="let label of autocompletion?.label?.hits"
-              [queryParams]="{ label: label.id }"
+              [queryParams]="{ query: label.name }"
               [routerLink]="['/', 'search']"
               color="accent"
               selected
+              (click)="onSuggestionClicked()"
               >{{ label.name }}</mat-chip
             >
           </mat-chip-list>

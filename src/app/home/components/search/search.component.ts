@@ -52,7 +52,7 @@ export class SearchComponent implements OnInit {
     window.open(environment.serverConfig.root + '/documents/' + documentId + '/assets/' + assetId, '_blank');
   }
   
-  onDocumentClicked() {
+  onSuggestionClicked() {
     this.manualClose.next();
   }
 }
