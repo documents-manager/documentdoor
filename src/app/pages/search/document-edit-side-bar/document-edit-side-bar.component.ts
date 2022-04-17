@@ -14,6 +14,7 @@ export class DocumentEditSideBarComponent implements OnInit {
   @Input() document!: Document;
   @Output() closed = new EventEmitter<void>();
   @Output() save = new EventEmitter<Document>();
+  @Output() delete = new EventEmitter<number>();
   @ViewChild('docEdit') docEdit!: DocumentEditComponent;
   epics$ = this.epicService.getAll();
   labels$ = this.labelService.getAll();
@@ -28,5 +29,9 @@ export class DocumentEditSideBarComponent implements OnInit {
 
   onSaveClick() {
     this.save.emit(this.docEdit.createDocumentDto());
+  }
+
+  onDeleteClick() {
+    this.delete.emit(this.document.id);
   }
 }

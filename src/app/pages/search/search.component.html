@@ -3,6 +3,7 @@
     <app-document-edit-side-bar
       (closed)="onClosed()"
       (save)="onSave($event)"
+      (delete)="onDelete($event)"
       *ngIf="selected.document"
       [document]="selected.document"
     ></app-document-edit-side-bar>

@@ -47,4 +47,13 @@ export class SearchComponent implements OnInit, OnDestroy {
   onSave(document: Document) {
     this.documentService.update(document);
   }
+
+  onDelete(documentId: number) {
+    this.documentService.delete(documentId).subscribe(
+      () => (
+        this.store.dispatch(resetSelection()),
+        this.store.dispatch(search())
+      )
+    );
+  }
 }

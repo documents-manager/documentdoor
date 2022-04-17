@@ -13,6 +13,7 @@
     fxFlex
   ></app-document-edit>
   <div fxLayout fxLayoutAlign="end">
+    <button (click)="onDeleteClick()" mat-button color="warn">Löschen</button>
     <button (click)="onNoClick()" mat-button>Abbrechen</button>
     <button
       (click)="onSaveClick()"
