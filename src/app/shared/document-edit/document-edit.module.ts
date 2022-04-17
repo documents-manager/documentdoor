@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { FlexModule } from '@angular/flex-layout';
 import { MatDividerModule } from '@angular/material/divider';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [DocumentEditComponent],
@@ -26,7 +27,8 @@ import { MatDividerModule } from '@angular/material/divider';
     MatIconModule,
     MatInputModule,
     FlexModule,
-    MatDividerModule
+    MatDividerModule,
+    RouterModule
   ]
 })
 export class DocumentEditModule {}

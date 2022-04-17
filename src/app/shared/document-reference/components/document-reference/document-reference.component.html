@@ -3,8 +3,13 @@
     <mat-form-field *ngIf="{ filteredDocuments: filteredDocuments$ | async } as val" appearance="fill">
       <mat-label>Dokument</mat-label>
 
-      <mat-chip-list #epicList aria-label="Epicausahl">
-        <mat-chip (removed)="removeDocument()" *ngIf="$any(control.get('targetDocument')).value as document; else textInput">
+      <mat-chip-list #documentList aria-label="Dokumentenauswahl">
+        <mat-chip 
+          (removed)="removeDocument()" 
+          *ngIf="$any(control.get('targetDocument')).value as document; else textInput"
+          [queryParams]="{ documentId: document.id, query: document.title}"
+          [routerLink]="['/', 'search']"
+        >
           {{ document?.title }}
           <button matChipRemove>
             <mat-icon>cancel</mat-icon>
@@ -12,21 +17,21 @@
         </mat-chip>
         <ng-template #textInput>
           <input
-            #epicInput
+            #documentInput
             [formControl]="documentTitleControl"
-            [matAutocomplete]="epicAuto"
-            [matChipInputFor]="epicList"
+            [matAutocomplete]="documentAuto"
+            [matChipInputFor]="documentList"
             placeholder="Suche..."
           />
         </ng-template>
       </mat-chip-list>
       <mat-autocomplete
-        #epicAuto="matAutocomplete"
+        #documentAuto="matAutocomplete"
         (optionSelected)="selectDocument($event, val.filteredDocuments ?? [])"
         autoActiveFirstOption
       >
-        <mat-option *ngFor="let epic of val.filteredDocuments" [value]="epic">
-          {{ epic.title }}
+        <mat-option *ngFor="let document of val.filteredDocuments" [value]="document">
+          {{ document.title }}
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>

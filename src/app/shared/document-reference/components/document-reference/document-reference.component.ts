@@ -13,7 +13,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DocumentReferenceComponent implements OnInit {
-  @ViewChild('epicInput') epicInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('documentInput') documentInput!: ElementRef<HTMLInputElement>;
   @Input() control!: FormGroup;
   @Output() removed = new EventEmitter<void>();
   documentTitleControl = new FormControl();
@@ -29,7 +29,6 @@ export class DocumentReferenceComponent implements OnInit {
         if (typeof query !== 'string') {
           return of([]);
         }
-
         return this.searchService.autocomplete(query).pipe(map(autocomplete => autocomplete.document?.hits ?? []));
       })
     );
@@ -44,7 +43,6 @@ export class DocumentReferenceComponent implements OnInit {
   }
 
   removeDocument(): void {
-    this.epicInput.nativeElement.value = '';
     this.control.get('targetDocument')!.reset();
     this.documentTitleControl.reset();
     this.documentTitleControl.enable();
@@ -52,13 +50,13 @@ export class DocumentReferenceComponent implements OnInit {
 
   selectDocument(event: MatAutocompleteSelectedEvent, filteredDocuments: DocumentLink[]) {
     const { assets, ...documentLink } = this._findDocument(event.option.viewValue, filteredDocuments) ?? {};
-    this.epicInput.nativeElement.value = '';
+    this.documentInput.nativeElement.value = '';
     this.documentTitleControl.setValue(null);
     this.documentTitleControl.disable();
     this.control.get('targetDocument')!.setValue(documentLink);
   }
 
   private _findDocument(title: string, filteredDocuments: DocumentLink[]): DocumentLink | undefined {
-    return filteredDocuments.find(epic => epic.title === title);
+    return filteredDocuments.find(document => document.title === title);
   }
 }

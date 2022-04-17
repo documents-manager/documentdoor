@@ -12,6 +12,7 @@ import { EnumToArrayPipe } from './pipes/enum-to-array.pipe';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatChipsModule } from '@angular/material/chips';
+import { RouterModule } from '@angular/router';
 
 const components = [DocumentReferenceComponent, DocumentReferencesComponent];
 const pipes = [EnumToArrayPipe];
@@ -28,7 +29,8 @@ const pipes = [EnumToArrayPipe];
     ReactiveFormsModule,
     MatAutocompleteModule,
     MatInputModule,
-    MatChipsModule
+    MatChipsModule,
+    RouterModule
   ],
   exports: components
 })
