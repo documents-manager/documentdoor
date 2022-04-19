@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subject, takeUntil } from 'rxjs';
 import { search, searchQuery, selectDocument } from 'src/app/state/search/search.actions';
+import { searchQuery as getSearchQuery } from '../../state/search/search.selectors';
 import { Document } from '@state';
 import { selectedDocumentId } from '../../state/search/search.selectors';
 import { DocumentService } from '../../state/services/document.service';
@@ -20,6 +21,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     filter(documentId => !!documentId),
     switchMap(documentId => this.documentService.getByKey(documentId))
   );
+  currentSearchQuery$ = this.store.select(getSearchQuery);
   destroy$ = new Subject<void>();
   constructor(
     private route: ActivatedRoute,
@@ -28,9 +30,14 @@ export class SearchComponent implements OnInit, OnDestroy {
     ) { }
 
   ngOnInit(): void {
+    let currentSearchQuery = '';
+    this.currentSearchQuery$.pipe(takeUntil(this.destroy$)).subscribe(data => currentSearchQuery = data);
+
     this.route.queryParams.pipe(takeUntil(this.destroy$)).subscribe(queryParams => {
-      this.store.dispatch(searchQuery({query: decodeURI(queryParams.query)}));
-      this.store.dispatch(search());
+      if (currentSearchQuery != queryParams.query) {
+        this.store.dispatch(searchQuery({query: queryParams.query}));
+        this.store.dispatch(search());
+      }
       this.store.dispatch(selectDocument({documentId: +queryParams['documentId']}));
     })
   }
