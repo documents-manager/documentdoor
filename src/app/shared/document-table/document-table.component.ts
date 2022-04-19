@@ -2,11 +2,12 @@ import { Component, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
-import { search, searchChangePage, selectDocument, searchChangeSort } from '../../state/search/search.actions';
+import { search, searchChangePage, selectDocument, searchChangeSort, resetSelection } from '../../state/search/search.actions';
 import { selectedDocumentId, searchedDocuments, searchHitCount, searchPage } from '../../state/search/search.selectors';
 import { Store } from '@ngrx/store';
 import { SortOrder } from 'src/app/state/search/search.model';
 import { DocumentList } from 'src/app/state/models/document';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-document-table',
@@ -28,10 +29,21 @@ export class DocumentTableComponent {
 
   constructor(
     private readonly store: Store,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   selectDocument(documentId: number) {
-    this.store.dispatch(selectDocument({documentId}));
+    const currentId = this.route.snapshot.queryParams?.documentId;
+    const queryParams: Params = { documentId: currentId == documentId ? undefined : documentId };
+
+    this.router.navigate(
+      [], 
+      {
+        relativeTo: this.route,
+        queryParams: queryParams, 
+        queryParamsHandling: 'merge',
+      });
   }
 
   changePage(pageEvent: PageEvent) {
