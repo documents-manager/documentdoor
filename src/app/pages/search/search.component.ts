@@ -31,7 +31,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     let currentSearchQuery = '';
-    this.currentSearchQuery$.subscribe(data => currentSearchQuery = data);
+    this.currentSearchQuery$.pipe(takeUntil(this.destroy$)).subscribe(data => currentSearchQuery = data);
 
     this.route.queryParams.pipe(takeUntil(this.destroy$)).subscribe(queryParams => {
       if (currentSearchQuery != queryParams.query) {
