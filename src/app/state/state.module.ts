@@ -17,6 +17,7 @@ import { PluralHttpUrlGenerator } from './http-url.generator';
 import { DocumentDialogModule } from '../shared/document-dialog/document-dialog.module';
 import { EpicDialogModule } from '../shared/epic-dialog/epic-dialog.module';
 import { LabelDialogModule } from '../shared/label-dialog/label-dialog.module';
+import { APP_ENV, Environment } from '../../environments';
 
 @NgModule({
   declarations: [],
@@ -37,7 +38,7 @@ import { LabelDialogModule } from '../shared/label-dialog/label-dialog.module';
     LabelDialogModule
   ],
   providers: [
-    { provide: DefaultDataServiceConfig, useValue: environment.serverConfig },
+    { provide: DefaultDataServiceConfig, useFactory: (env: Environment) => env, deps: [APP_ENV] },
     { provide: HttpUrlGenerator, useClass: PluralHttpUrlGenerator }
   ]
 })

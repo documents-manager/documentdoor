@@ -2,15 +2,11 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import { DefaultDataServiceConfig } from '@ngrx/data';
-import { Environment } from './environment.model';
+import { EnvironmentConfig } from './index';
 
-export const environment: Environment = {
+export const environment: EnvironmentConfig = {
   production: false,
-  serverConfig: {
-    root: 'http://localhost:8080/api',
-    timeout: 3000
-  }
+  configFile: 'local.json'
 };
 
 /*

@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { merge, Observable, Subject } from 'rxjs';
 import { debounceTime, filter, map } from 'rxjs/operators';
@@ -6,7 +6,7 @@ import { FocusMonitor } from '@angular/cdk/a11y';
 import { MatInput } from '@angular/material/input';
 import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { AutocompleteResult } from '../../../state/search/search.model';
-import { environment } from '../../../../environments/environment';
+import { APP_ENV, Environment } from '../../../../environments';
 
 @Component({
   selector: 'app-search',
@@ -27,9 +27,7 @@ export class SearchComponent implements OnInit {
   searchFormControl = new FormControl();
   manualClose = new Subject<void>();
 
-  constructor(
-    private focusMonitor: FocusMonitor,
-  ) {
+  constructor(@Inject(APP_ENV) private env: Environment, private focusMonitor: FocusMonitor) {
     this.searchTermChanged = this.searchFormControl.valueChanges.pipe(debounceTime(200));
   }
 
@@ -49,9 +47,9 @@ export class SearchComponent implements OnInit {
   }
 
   onAssetClicked(documentId: string | number, assetId: string | number) {
-    window.open(environment.serverConfig.root + '/documents/' + documentId + '/assets/' + assetId, '_blank');
+    window.open(this.env.root + '/documents/' + documentId + '/assets/' + assetId, '_blank');
   }
-  
+
   onSuggestionClicked() {
     this.manualClose.next();
   }

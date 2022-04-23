@@ -1,9 +1,6 @@
-import { Environment } from './environment.model';
+import { EnvironmentConfig } from './index';
 
-export const environment: Environment = {
-  production: true,
-  serverConfig: {
-    root: 'http://localhost:8081/api',
-    timeout: 3000
-  }
+export const environment: EnvironmentConfig = {
+  production: false,
+  configFile: 'prod.json'
 };

@@ -3,6 +3,7 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  Inject,
   Input,
   OnChanges,
   OnInit,
@@ -13,10 +14,10 @@ import { FormArray, FormGroup } from '@angular/forms';
 import { Document, Epic, Label } from '@state';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../environments/environment';
 import { debounceTime, map, startWith } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { FormFactoryService } from '../../../state/services/form-factory.service';
+import { APP_ENV, Environment } from '../../../../environments';
 
 @Component({
   selector: 'app-document-edit',
@@ -37,20 +38,24 @@ export class DocumentEditComponent implements OnInit, OnChanges {
   filteredEpics$!: Observable<Epic[]>;
   filteredLabels$!: Observable<Label[]>;
 
-  deleteUri = environment.serverConfig.root + '/staging';
-  uploadUri = environment.serverConfig.root + '/staging';
+  deleteUri = this.env.root + '/staging';
+  uploadUri = this.env.root + '/staging';
   getUri: string | undefined = undefined;
 
   @ViewChild('epicInput') epicInput!: ElementRef<HTMLInputElement>;
   @ViewChild('labelInput') labelInput!: ElementRef<HTMLInputElement>;
 
-  constructor(private formFactory: FormFactoryService, private changeDetector: ChangeDetectorRef) {}
+  constructor(
+    @Inject(APP_ENV) private env: Environment,
+    private formFactory: FormFactoryService,
+    private changeDetector: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
 
     if (this.document) {
-      this.getUri = environment.serverConfig.root + '/documents/' + this.document?.id + '/assets/';
+      this.getUri = this.env.root + '/documents/' + this.document?.id + '/assets/';
     }
 
     this.filteredEpics$ = this.form.get('epic')!.valueChanges.pipe(

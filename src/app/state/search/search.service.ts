@@ -1,24 +1,24 @@
-import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
-import {AutocompleteResult, SearchRequest, SearchResult} from './search.model';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
+import { Inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { AutocompleteResult, SearchRequest, SearchResult } from './search.model';
+import { HttpClient } from '@angular/common/http';
+import { APP_ENV, Environment } from '../../../environments';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchService {
-  constructor(private http: HttpClient) {}
+  constructor(@Inject(APP_ENV) private env: Environment, private http: HttpClient) {}
 
   search(request: SearchRequest): Observable<SearchResult> {
-    return this.http.post<SearchResult>(environment.serverConfig.root + '/search', request);
+    return this.http.post<SearchResult>(this.env.root + '/search', request);
   }
 
   autocomplete(query: string): Observable<AutocompleteResult> {
-    return this.http.get<AutocompleteResult>(environment.serverConfig.root + '/autocomplete', {
+    return this.http.get<AutocompleteResult>(this.env.root + '/autocomplete', {
       params: {
         q: query
       }
-    })
+    });
   }
 }
