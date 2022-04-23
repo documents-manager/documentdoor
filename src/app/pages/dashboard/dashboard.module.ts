@@ -10,6 +10,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { LayoutModule } from '@angular/cdk/layout';
 import { ReactiveComponentModule } from '@ngrx/component';
+import { EffectsModule } from '@ngrx/effects';
+import { DashboardEffects } from './state/dashboard.effects';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { StoreModule } from '@ngrx/store';
+import { dashboardFeatureKey, reducer } from './state/dashboard.reducer';
+import { MatListModule } from '@angular/material/list';
+import { FlexModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [DashboardComponent],
@@ -22,7 +29,12 @@ import { ReactiveComponentModule } from '@ngrx/component';
     MatIconModule,
     MatButtonModule,
     LayoutModule,
-    ReactiveComponentModule
+    ReactiveComponentModule,
+    StoreModule.forFeature(dashboardFeatureKey, reducer),
+    EffectsModule.forFeature([DashboardEffects]),
+    MatProgressSpinnerModule,
+    MatListModule,
+    FlexModule
   ]
 })
 export class DashboardModule {}

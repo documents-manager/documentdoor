@@ -1,25 +1,99 @@
-<div>
+<div *ngIf="loading$ | ngrxPush as loading">
   <h1 class="mat-h1">Dashboard</h1>
   <mat-grid-list *ngIf="isHandset$ | ngrxPush as isHandset" [cols]="isHandset.matches ? 1 : 2" rowHeight="350px">
-    <mat-grid-tile *ngFor="let card of cards$ | ngrxPush" [colspan]="isHandset.matches ? 1 : card.cols"
-                   [rowspan]="card.rows">
-        <mat-card class="dashboard-card">
-            <mat-card-header>
-                <mat-card-title>
-                    {{ card.title }}
-                    <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-                        <mat-icon>more_vert</mat-icon>
-                    </button>
-                    <mat-menu #menu="matMenu" xPosition="before">
-                        <button mat-menu-item>Expand</button>
-                        <button mat-menu-item>Remove</button>
-            </mat-menu>
+    <mat-grid-tile [colspan]="isHandset.matches ? 1 : 1" [rowspan]="1">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            Statistics
+            <button (click)="requestStats()" class="action-button" mat-icon-button>
+              <mat-icon>refresh</mat-icon>
+            </button>
           </mat-card-title>
         </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          <div>Card Content Here</div>
+        <mat-card-content>
+          <div *ngIf="!loading.count; else loadingTemplate" class="dashboard-card-content">
+            <ng-container *ngIf="stats$ | ngrxPush as stats">
+              <mat-list>
+                <mat-list-item>Documents {{ stats.documentCount }}</mat-list-item>
+                <mat-list-item>Epics {{ stats.epicCount }}</mat-list-item>
+                <mat-list-item>Labels {{ stats.labelCount }}</mat-list-item>
+                <mat-list-item>Assets {{ stats.assetCount }}</mat-list-item>
+                <mat-list-item>References {{ stats.referenceCount }}</mat-list-item>
+              </mat-list>
+            </ng-container>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="isHandset.matches ? 1 : 1" [rowspan]="1">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title> Reindex</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div *ngIf="!loading.reindex; else loadingTemplate" class="dashboard-card-content reindex-wrapper">
+            <p>Force a reindexation of all documents</p>
+            <button (click)="reindex()" mat-raised-button>Run</button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="isHandset.matches ? 1 : 1" [rowspan]="1">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            Last Created Documents
+            <button (click)="requestLastCreated()" class="action-button" mat-icon-button>
+              <mat-icon>refresh</mat-icon>
+            </button>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div *ngIf="!loading.lastCreated; else loadingTemplate" class="dashboard-card-content">
+            <ng-container *ngIf="lastCreated$ | ngrxPush as lastCreated">
+              <mat-nav-list>
+                <a *ngFor="let doc of lastCreated" [queryParams]="{ documentId: doc.id }" [routerLink]="['/', 'search']" mat-list-item>
+                  <div mat-line>{{ doc.title }}</div>
+                  <div mat-line>Created: {{ doc.created | date }}</div>
+                  <div mat-line>Last Updated: {{ doc.lastUpdated | date }}</div>
+                </a>
+              </mat-nav-list>
+            </ng-container>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="isHandset.matches ? 1 : 1" [rowspan]="1">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            Last Update Dcouments
+            <button (click)="requestLastUpdated()" class="action-button" mat-icon-button>
+              <mat-icon>refresh</mat-icon>
+            </button>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div *ngIf="!loading.lastUpdated; else loadingTemplate" class="dashboard-card-content">
+            <ng-container *ngIf="lastUpdated$ | ngrxPush as lastUpdated">
+              <mat-nav-list>
+                <a *ngFor="let doc of lastUpdated" [queryParams]="{ documentId: doc.id }" [routerLink]="['/', 'search']" mat-list-item>
+                  <div mat-line>{{ doc.title }}</div>
+                  <div mat-line>Created: {{ doc.created | date }}</div>
+                  <div mat-line>Last Updated: {{ doc.lastUpdated | date }}</div>
+                </a>
+              </mat-nav-list>
+            </ng-container>
+          </div>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>
 </div>
+
+<ng-template #loadingTemplate>
+  <div fxLayout="row" fxLayoutAlign="center center" style="width: 100%; height: 256px">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>
