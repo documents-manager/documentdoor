@@ -42,7 +42,14 @@
   padding: 16px;
 }
 
-.mat-nav-list a.active,
-.mat-nav-list a:hover {
+.mat-list-item {
   border-radius: 0 2em 2em 0;
+}
+
+.mat-nav-list a:hover {
+  background-color: rgb(235, 235, 235) !important;
+}
+
+.mat-nav-list a.active {
+  background-color: lightgrey;
 }
