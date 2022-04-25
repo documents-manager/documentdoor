@@ -2,11 +2,13 @@
 @use '@angular/material' as mat;
 @use 'src/theming/palette.scss' as theme;
 $primary-color: mat.get-color-from-palette(theme.$primary, 400);
-$input-width: 35rem;
+$input-width: 55vw;
+$max-input-width: 35rem;
 
 .searchContainer {
   font-size: 16px;
   padding: 8px;
+  text-align: center;
 
   .mat-form-field {
     border-radius: 5px;
@@ -24,6 +26,7 @@ $input-width: 35rem;
 
 .drop-down-input {
   width: $input-width;
+  max-width: $max-input-width;
 }
 
 .drop-down-input-active {
@@ -32,6 +35,7 @@ $input-width: 35rem;
 
 .drop-down-panel {
   width: $input-width;
+  max-width: $max-input-width;
   min-height: 5rem;
   padding: 1rem;
   box-sizing: border-box;

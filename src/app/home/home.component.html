@@ -8,7 +8,7 @@
       [mode]="data.isHandset ? 'over' : 'side'"
       [opened]="!data.isHandset"
     >
-      <mat-toolbar color="primary" class="toolbar">
+      <mat-toolbar color="primary" class="toolbar logo-wrap">
         <a routerLink="/"><img alt="logo" class="logo" src="assets/logos/white.svg" /></a>
       </mat-toolbar>
       <div class="new-button-container">
@@ -24,7 +24,7 @@
       <app-tree-nav [data]="$any(data.treeData)"></app-tree-nav>
     </mat-sidenav>
     <mat-sidenav-content fxLayout="column">
-      <mat-toolbar class="primary-toolbar toolbar" color="primary" fxLayout="row" fxLayoutAlign=" center">
+      <mat-toolbar class="primary-toolbar toolbar search-wrap" color="primary" fxLayout="row" fxLayoutAlign=" center">
         <div fxFlex="nogrow">
           <button (click)="drawer.toggle()" *ngIf="data.isHandset" aria-label="Toggle sidenav" mat-icon-button type="button">
             <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
@@ -33,7 +33,7 @@
 
         <div fxLayout="row" fxFlex="fill" fxLayoutAlign="space-around center">
           <app-search
-            fxFlex="50"
+            fxFlex="100"
             fxFlex.lt-md="100"
             [term]="term$ | ngrxPush"
             (searchSubmit)="onSearchSubmit($event)"
