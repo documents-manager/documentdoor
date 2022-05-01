@@ -29,6 +29,6 @@ export interface DocumentReference {
 }
 
 export enum DocumentReferenceType {
-  MENTION = 'MENTION',
-  RELATED = 'RELATED'
+  MENTION = 'Erwähnung',
+  RELATED = 'Verwandt'
 }

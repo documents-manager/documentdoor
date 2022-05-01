@@ -5,7 +5,7 @@
       <mat-card class="dashboard-card">
         <mat-card-header>
           <mat-card-title>
-            Statistics
+            Statistiken
             <button (click)="requestStats()" class="action-button" mat-icon-button>
               <mat-icon>refresh</mat-icon>
             </button>
@@ -15,11 +15,11 @@
           <div *ngIf="!loading.count; else loadingTemplate" class="dashboard-card-content">
             <ng-container *ngIf="stats$ | ngrxPush as stats">
               <mat-list>
-                <mat-list-item>Documents {{ stats.documentCount }}</mat-list-item>
+                <mat-list-item>Dokumente {{ stats.documentCount }}</mat-list-item>
                 <mat-list-item>Epics {{ stats.epicCount }}</mat-list-item>
                 <mat-list-item>Labels {{ stats.labelCount }}</mat-list-item>
                 <mat-list-item>Assets {{ stats.assetCount }}</mat-list-item>
-                <mat-list-item>References {{ stats.referenceCount }}</mat-list-item>
+                <mat-list-item>Referenzen {{ stats.referenceCount }}</mat-list-item>
               </mat-list>
             </ng-container>
           </div>
@@ -29,12 +29,12 @@
     <mat-grid-tile [colspan]="isHandset.matches ? 1 : 1" [rowspan]="1">
       <mat-card class="dashboard-card">
         <mat-card-header>
-          <mat-card-title> Reindex</mat-card-title>
+          <mat-card-title>Neuindizierung</mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <div *ngIf="!loading.reindex; else loadingTemplate" class="dashboard-card-content reindex-wrapper">
-            <p>Force a reindexation of all documents</p>
-            <button (click)="reindex()" mat-raised-button>Run</button>
+            <p>Erzwingen einer Neuindizierung aller Dokumente</p>
+            <button (click)="reindex()" mat-raised-button>Starten</button>
           </div>
         </mat-card-content>
       </mat-card>
@@ -43,7 +43,7 @@
       <mat-card class="dashboard-card">
         <mat-card-header>
           <mat-card-title>
-            Last Created Documents
+            Zuletzt erstellte Dokumente
             <button (click)="requestLastCreated()" class="action-button" mat-icon-button>
               <mat-icon>refresh</mat-icon>
             </button>
@@ -68,7 +68,7 @@
       <mat-card class="dashboard-card">
         <mat-card-header>
           <mat-card-title>
-            Last Update Dcouments
+            Zuletzt geänderte Dokumente
             <button (click)="requestLastUpdated()" class="action-button" mat-icon-button>
               <mat-icon>refresh</mat-icon>
             </button>
