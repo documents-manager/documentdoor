@@ -60,12 +60,17 @@
   <mat-divider></mat-divider>
 
   <div>
-    <app-file-upload [assets]="assets" [deleteUri]="deleteUri" [getUri]="getUri" [uploadUri]="uploadUri"></app-file-upload>
+    <app-file-upload [assets]="assets" [deleteUri]="deleteUri" [getUri]="getUri"
+                     [uploadUri]="uploadUri"></app-file-upload>
   </div>
 
   <mat-divider></mat-divider>
 
   <div>
     <app-document-references [references]="references"></app-document-references>
+  </div>
+
+  <div *ngIf="showReferencedBy">
+    <app-document-references [editable]="false" [references]="referencedBy"></app-document-references>
   </div>
 </div>

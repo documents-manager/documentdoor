@@ -6,11 +6,12 @@
     </button>
   </div>
   <app-document-edit
-    #docEdit
-    [document]="document | cloneDeep"
-    [epics]="(epics$ | async) ?? []"
-    [labels]="(labels$ | async) ?? []"
-    fxFlex
+          #docEdit
+          [document]="document | cloneDeep"
+          [epics]="(epics$ | async) ?? []"
+          [labels]="(labels$ | async) ?? []"
+          [showReferencedBy]="true"
+          fxFlex
   ></app-document-edit>
   <div fxLayout fxLayoutAlign="end">
     <button (click)="onDeleteClick()" mat-button color="warn">Löschen</button>

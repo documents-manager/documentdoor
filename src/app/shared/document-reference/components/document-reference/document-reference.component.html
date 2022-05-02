@@ -4,14 +4,14 @@
       <mat-label>Dokument</mat-label>
 
       <mat-chip-list #documentList aria-label="Dokumentenauswahl">
-        <mat-chip 
-          (removed)="removeDocument()" 
-          *ngIf="$any(control.get('targetDocument')).value as document; else textInput"
-          [queryParams]="{ documentId: document.id, query: document.title}"
-          [routerLink]="['/', 'search']"
+        <mat-chip
+                (removed)="removeDocument()"
+                *ngIf="$any(control.get('targetDocument')).value as document; else textInput"
+                [queryParams]="{ documentId: document.id, query: document.title}"
+                [routerLink]="['/', 'search']"
         >
           {{ document?.title }}
-          <button matChipRemove>
+          <button *ngIf="editable" matChipRemove>
             <mat-icon>cancel</mat-icon>
           </button>
         </mat-chip>
@@ -45,7 +45,7 @@
       </mat-select>
     </mat-form-field>
   </div>
-  <button (click)="clearInputs()" mat-icon-button>
+  <button (click)="clearInputs()" *ngIf="editable" mat-icon-button>
     <mat-icon>clear</mat-icon>
   </button>
 </div>

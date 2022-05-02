@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
-import { DocumentReferenceType } from '@state';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
+import {FormArray, FormBuilder, Validators} from '@angular/forms';
+import {DocumentReferenceType} from '@state';
 
 @Component({
   selector: 'app-document-references',
@@ -10,6 +10,7 @@ import { DocumentReferenceType } from '@state';
 })
 export class DocumentReferencesComponent implements OnInit {
   @Input() references!: FormArray;
+  @Input() editable = true
 
   constructor(private fb: FormBuilder, private changeDetector: ChangeDetectorRef) {}
 

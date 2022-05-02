@@ -1,12 +1,13 @@
 <div fxLayout="row" fxLayoutAlign="space-between center">
-  <span>Referenzen</span>
-  <button (click)="addReference()" mat-icon-button>
+  <span>{{ editable ? 'Referenzen' : 'Referenziert von' }}</span>
+  <button (click)="addReference()" *ngIf="editable" mat-icon-button>
     <mat-icon>add</mat-icon>
   </button>
 </div>
 
 <div>
   <ng-container *ngFor="let control of references.controls; index as i">
-    <app-document-reference (removed)="removeControl(i)" [control]="$any(references.controls[i])"></app-document-reference>
+    <app-document-reference (removed)="removeControl(i)" [control]="$any(references.controls[i])"
+                            [editable]="editable"></app-document-reference>
   </ng-container>
 </div>

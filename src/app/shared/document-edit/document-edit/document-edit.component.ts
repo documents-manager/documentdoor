@@ -10,14 +10,14 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import { FormArray, FormGroup } from '@angular/forms';
-import { Document, Epic, Label } from '@state';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Observable } from 'rxjs';
-import { debounceTime, map, startWith } from 'rxjs/operators';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { FormFactoryService } from '../../../state/services/form-factory.service';
-import { APP_ENV, Environment } from '../../../../environments';
+import {FormArray, FormGroup} from '@angular/forms';
+import {Document, Epic, Label} from '@state';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {Observable} from 'rxjs';
+import {debounceTime, map, startWith} from 'rxjs/operators';
+import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
+import {FormFactoryService} from '../../../state/services/form-factory.service';
+import {APP_ENV, Environment} from '../../../../environments';
 
 @Component({
   selector: 'app-document-edit',
@@ -29,8 +29,10 @@ export class DocumentEditComponent implements OnInit, OnChanges {
   @Input() epics!: Epic[];
   @Input() labels!: Label[];
   @Input() document: Document | null = null;
+  @Input() showReferencedBy = false;
   form!: FormGroup;
   references!: FormArray;
+  referencedBy!: FormArray;
   assets!: FormArray;
   selectedLabels: Label[] = [];
   selectedEpic: Epic | undefined = undefined;
@@ -169,6 +171,7 @@ export class DocumentEditComponent implements OnInit, OnChanges {
 
   private initForm() {
     this.form = this.formFactory.buildDocumentForm(this.document);
+    this.referencedBy = this.formFactory.buildReferenceForm(this.document?.referencedBy ?? [])
     this.references = this.form.get('references') as FormArray;
     this.assets = this.form.get('assets') as FormArray;
     this.selectedEpic = this.document?.epic ?? undefined;

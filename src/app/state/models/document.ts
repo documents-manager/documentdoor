@@ -1,10 +1,11 @@
-import { Epic } from './epic';
-import { Label } from './label';
-import { Asset } from './asset';
+import {Epic} from './epic';
+import {Label} from './label';
+import {Asset} from './asset';
 
 export interface Document extends DocumentList {
   assets: Asset[];
   references: DocumentReference[];
+  referencedBy: DocumentReference[];
 }
 
 export interface DocumentList {
