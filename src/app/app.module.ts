@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -20,6 +20,9 @@ import { A11yModule } from '@angular/cdk/a11y';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import localeDe from '@angular/common/locales/de';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeDe)
 
 @NgModule({
   declarations: [AppComponent],
@@ -54,7 +57,9 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     MatIconModule
   ],
-  providers: [],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'de-DE'},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

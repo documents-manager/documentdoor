@@ -55,8 +55,8 @@
               <mat-nav-list>
                 <a *ngFor="let doc of lastCreated" [queryParams]="{ documentId: doc.id }" [routerLink]="['/', 'search']" mat-list-item>
                   <div mat-line>{{ doc.title }}</div>
-                  <div mat-line>Created: {{ doc.created | date }}</div>
-                  <div mat-line>Last Updated: {{ doc.lastUpdated | date }}</div>
+                  <div mat-line>Erstellt: {{ doc.created | date:'longDate' }}</div>
+                  <div mat-line>Geändert: {{ doc.lastUpdated | date:'longDate' }}</div>
                 </a>
               </mat-nav-list>
             </ng-container>
@@ -80,8 +80,8 @@
               <mat-nav-list>
                 <a *ngFor="let doc of lastUpdated" [queryParams]="{ documentId: doc.id }" [routerLink]="['/', 'search']" mat-list-item>
                   <div mat-line>{{ doc.title }}</div>
-                  <div mat-line>Created: {{ doc.created | date }}</div>
-                  <div mat-line>Last Updated: {{ doc.lastUpdated | date }}</div>
+                  <div mat-line>Erstellt: {{ doc.created | date:'longDate' }}</div>
+                  <div mat-line>Geändert: {{ doc.lastUpdated | date:'longDate' }}</div>
                 </a>
               </mat-nav-list>
             </ng-container>
