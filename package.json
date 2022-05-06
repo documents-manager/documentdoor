@@ -23,6 +23,7 @@
     "@angular/platform-browser": "~13.2.4",
     "@angular/platform-browser-dynamic": "~13.2.4",
     "@angular/router": "~13.2.4",
+    "@babel/runtime": "^7.17.9",
     "@github/markdown-toolbar-element": "^2.1.1",
     "@ngrx/component": "^13.1.0",
     "@ngrx/data": "^13.0.2",

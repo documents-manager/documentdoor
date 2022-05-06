@@ -1,4 +1,5 @@
-<div fxLayout="row" fxLayoutAlign="space-between center">
+<div *ngIf="editable || (!editable && references.controls.length > 0)" fxLayout="row"
+     fxLayoutAlign="space-between center">
   <span>{{ editable ? 'Referenzen' : 'Referenziert von' }}</span>
   <button (click)="addReference()" *ngIf="editable" mat-icon-button>
     <mat-icon>add</mat-icon>

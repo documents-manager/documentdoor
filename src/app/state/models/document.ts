@@ -26,6 +26,7 @@ export interface DocumentLink {
 
 export interface DocumentReference {
   targetDocument: DocumentLink;
+  sourceDocument: DocumentLink;
   referenceType: DocumentReferenceType;
 }
 

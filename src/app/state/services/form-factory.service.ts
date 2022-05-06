@@ -1,12 +1,13 @@
-import { Injectable } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Asset, Document, DocumentReference } from '@state';
+import {Injectable} from '@angular/core';
+import {FormBuilder, FormControl, Validators} from '@angular/forms';
+import {Asset, Document, DocumentReference} from '@state';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FormFactoryService {
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+  }
 
   buildDocumentForm(document: Document | null) {
     const references = this.buildReferenceForm(document?.references ?? []);
@@ -33,7 +34,8 @@ export class FormFactoryService {
       references.map(reference =>
         this.fb.group({
           referenceType: [reference.referenceType, [Validators.required]],
-          targetDocument: [reference.targetDocument, [Validators.required]]
+          targetDocument: [reference.targetDocument, [Validators.required]],
+          sourceDocument: [reference.sourceDocument]
         })
       )
     );

@@ -30,7 +30,8 @@ export class DocumentReferenceComponent implements OnInit {
   types = DocumentReferenceType;
   filteredDocuments$!: Observable<DocumentLink[]>;
 
-  constructor(private searchService: SearchService, private hostElement: ElementRef) {}
+  constructor(private searchService: SearchService) {
+  }
 
   ngOnInit(): void {
     this.filteredDocuments$ = this.documentTitleControl!.valueChanges.pipe(
