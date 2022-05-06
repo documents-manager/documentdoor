@@ -31,7 +31,7 @@
       "
     >
       <ng-container *ngIf="autocompletion?.document?.hitCount ?? 0 > 0">
-        <div mat-subheader>Documents</div>
+        <div mat-subheader>Dokumente</div>
         <a
           *ngFor="let document of autocompletion?.document?.hits"
           [queryParams]="{ documentId: document.id, query: document.title}"
